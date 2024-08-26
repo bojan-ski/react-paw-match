@@ -20,7 +20,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="storeNavbar">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
                         {navigationLinks.map(navigationLink => {
-                            return <li key={navigationLink.label} className="nav-item">
+                            return <li key={navigationLink.label} className="nav-item me-3">
                                 <NavLink to={navigationLink.href} className='nav-link capitalize'>
                                     {navigationLink.label}
                                 </NavLink>

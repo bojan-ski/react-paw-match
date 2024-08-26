@@ -3,6 +3,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 // PAGES
 import AppLayout from "./pages/AppLayout.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
+import SignUp from "./pages/SignUp.jsx"
+import SignIn from "./pages/SignIn.jsx"
+import TermsAndConditions from "./pages/TermsAndConditions"
+import PrivacyPolicy from "./pages/PrivacyPolicy"
 import Profile from "./pages/Profile.jsx"
 import Blog from "./pages/Blog.jsx"
 import Contact from "./pages/Contact.jsx"
@@ -18,6 +22,22 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: 'sign-up',
+        element: <SignUp />,
+      },
+      {
+        path: 'sign-in',
+        element: <SignIn />,
+      },
+      {
+        path: '/terms-and-conditions',
+        element: <TermsAndConditions />,
+      },
+      {
+        path: '/privacy-policy',
+        element: <PrivacyPolicy />,
       },
       {
         path: '/nalog',
