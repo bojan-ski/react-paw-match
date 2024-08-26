@@ -64,10 +64,21 @@ main {
 
 /* Login page / Sign Up page */
 .sing-up-page form,
-.login-page .login-page-content{
+.sing-in-page .sing-in-page-content,
+.forgot-password-page .forgot-password-content{
   max-width: 700px;
   margin: 0 auto;
   box-shadow: 3px 3px 50px rgba(0, 0, 0, 0.1);
 }
+
+.sing-up-page form .checkbox,
+.sing-in-page-page-footer p,
+.sing-in-page-page-footer a,
+.forgot-password-page .forgot-password-footer p,
+.forgot-password-page .forgot-password-footer a{
+  font-size: 0.8rem;
+}
+
+
 
 /* ---------- FOOTER ---------- */

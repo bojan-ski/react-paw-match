@@ -4,9 +4,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import AppLayout from "./pages/AppLayout.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
 import SignUp from "./pages/SignUp.jsx"
-import SignIn from "./pages/SignIn.jsx"
-import TermsAndConditions from "./pages/TermsAndConditions"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
+import TermsAndConditions from "./pages/TermsAndConditions"
+import SignIn from "./pages/SignIn.jsx"
+import ForgotPassword from "./pages/ForgotPassword.jsx"
 import Profile from "./pages/Profile.jsx"
 import Blog from "./pages/Blog.jsx"
 import Contact from "./pages/Contact.jsx"
@@ -28,16 +29,20 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: 'sign-in',
-        element: <SignIn />,
-      },
-      {
         path: '/terms-and-conditions',
         element: <TermsAndConditions />,
       },
       {
         path: '/privacy-policy',
         element: <PrivacyPolicy />,
+      },
+      {
+        path: 'sign-in',
+        element: <SignIn />,
+      },
+      {
+        path: 'forgot-password',
+        element: <ForgotPassword />,
       },
       {
         path: '/nalog',

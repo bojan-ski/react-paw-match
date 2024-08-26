@@ -13,26 +13,27 @@ const SignUp = () => {
 
     console.log(enteredUsername);
     console.log(enteredEmail);
-    console.log(enteredPassword);    
+    console.log(enteredPassword);
   }
 
   return (
     <div className='sing-up-page'>
       <div className="container">
+        
         <form onSubmit={handleSignUpUserSubmit} className='p-5 my-5 rounded-5'>
 
-          <h3 className="text-center mb-4">
-            Sign Up
+          <h3 className="text-center fw-bold mb-4">
+            Registruj se
           </h3>
 
-          {/* login email */}
+          {/* sign up email */}
           <FormInput label='Korisničko ime' name="signUpUsername" type='text' required={true} />
 
-          {/* login email */}
+          {/* sign up email */}
           <FormInput label='Elektronska adresa' name="signUpEmail" type='email' required={true} />
 
-          {/* login password */}
-          <FormInput label='Šifra' name="signUpPassword" type='password' required={true} minLength={6}/>
+          {/* sign up password */}
+          <FormInput label='Šifra' name="signUpPassword" type='password' required={true} minLength={6} />
 
           {/* Terms & Conditions checkbox */}
           <FormInputCheckbox linkTitle='Pravila korišćenja' linkUrl='terms-and-conditions' />
@@ -40,9 +41,9 @@ const SignUp = () => {
           {/* Privacy Policy checkbox */}
           <FormInputCheckbox linkTitle='Pravila privatnosti' linkUrl='privacy-policy' />
 
-          {/* login submit btn */}
+          {/* sign up submit btn */}
           <button type="submit" className="btn btn-primary mt-2">
-            Sign Up
+            Registruj se
           </button>
         </form>
       </div>
