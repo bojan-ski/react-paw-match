@@ -1,3 +1,5 @@
+// api func
+import userSignUp from '../api/userSignUp'
 // components
 import FormInput from '../components/FormInput'
 import FormInputCheckbox from '../components/FormInputCheckbox'
@@ -14,12 +16,25 @@ const SignUp = () => {
     console.log(enteredUsername);
     console.log(enteredEmail);
     console.log(enteredPassword);
+
+    const response = await userSignUp(enteredUsername, enteredEmail, enteredPassword)
+
+    if (response) {
+      e.target.elements[0].value = ''
+      e.target.elements[1].value = ''
+      e.target.elements[2].value = ''
+      e.target.elements[3].checked = false
+      e.target.elements[4].checked = false
+
+      // navigate user
+      setTimeout(() => window.location.href = '/nalog', 1500)
+    }
   }
 
   return (
     <div className='sing-up-page'>
       <div className="container">
-        
+
         <form onSubmit={handleSignUpUserSubmit} className='p-5 my-5 rounded-5'>
 
           <h3 className="text-center fw-bold mb-4">
