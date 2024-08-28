@@ -1,15 +1,30 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+// api func
+import userResetPassword from "../api/userResetPassword"
 // components
 import FormInput from "../components/FormInput"
 
 
 const ForgotPassword = () => {
+    const navigate = useNavigate()
+
     const handleResetPassword = async e => {
         e.preventDefault()
 
-        const enteredEmail = e.target.elements[0].value.trim()
+        e.preventDefault()
 
-        console.log(enteredEmail);        
+        if (window.confirm('Da li ste sigurni da želite da novu šifru?')) {
+            const enteredEmail = e.target.elements[0].value.trim()
+
+            const response = await userResetPassword(enteredEmail)
+
+            if (response) {
+                e.target.elements[0].value = ''
+
+                // after the user has submitted for a new password, the user is redirected to the Dashboard page
+                setTimeout(() => navigate('/'), 2500)
+            }
+        }
     }
 
     return (
