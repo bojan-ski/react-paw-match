@@ -8,17 +8,17 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 {/* home btn - link */}
-                <Link className="fw-bold text-decoration-none text-dark fs-2" to="/">
+                <Link to="/" className="fw-bold text-decoration-none text-dark fs-2">
                     Šapo Spoj
                 </Link>
 
                 {/* collapse btn */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNavbar" aria-controls="storeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sapoSpojNavbar" aria-controls="sapoSpojNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
                 {/* collapse - navigation links */}
-                <div className="collapse navbar-collapse" id="storeNavbar">
+                <div className="collapse navbar-collapse" id="sapoSpojNavbar">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
                         {navigationLinks.map(navigationLink => {
                             return <li key={navigationLink.label} className="nav-item me-3">

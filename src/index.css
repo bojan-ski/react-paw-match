@@ -7,6 +7,10 @@
 
 /* ---------- GENERAL ---------- */
 :root {
+  /* colors */
+  --light-green-color: rgb(39, 201, 39);
+  --green-color: rgb(27, 134, 27);
+
 }
 
 * {
@@ -43,7 +47,7 @@ a{
 /* -------------------- APP COMPONENTS -------------------- */
 /* ---------- HEADER ---------- */
 header{
-  background-color: rgb(39, 201, 39);
+  background-color: var(--light-green-color);
 }
 
 /* Onboarding component */
@@ -54,7 +58,7 @@ header{
 /* Navbar component */
 .navbar .navbar-nav .nav-item a.active{
   font-weight: 500;
-  color: green;
+  color: var(--green-color);
 } 
 
 /* ---------- MAIN ---------- */
@@ -79,6 +83,15 @@ main {
   font-size: 0.8rem;
 }
 
+/* Profile page */
+.profile-page-options button:hover{
+  background-color: var(--light-green-color);
+}
+
+.profile-page-options .selected-profile-page-options{
+  background-color: var(--light-green-color);
+  color: #fff;
+}
 
 
 /* ---------- FOOTER ---------- */
