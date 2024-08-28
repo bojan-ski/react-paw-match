@@ -1,4 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom"
+// context
+import { AppProvider } from "../context.jsx"
 // pages
 import Loading from "./Loading"
 // components
@@ -11,15 +13,17 @@ const AppLayout = () => {
     const isPageLoading = navigation.state === 'loading'
 
     return (
-        <>
-            <Header />
+        <AppProvider>
+            <>
+                <Header />
 
-            <main>
-                {isPageLoading ? <Loading /> : <Outlet />}
-            </main>
+                <main>
+                    {isPageLoading ? <Loading /> : <Outlet />}
+                </main>
 
-            <Footer />
-        </>
+                <Footer />
+            </>
+        </AppProvider>
     )
 }
 

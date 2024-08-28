@@ -47,7 +47,7 @@ header{
 }
 
 /* Onboarding component */
-.onboarding a{
+.onboarding .onboarding-btn{
   font-size: 0.8rem;
 }
 

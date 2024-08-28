@@ -24,7 +24,7 @@ const SignIn = () => {
       e.target.elements[1].value = ''
 
       // navigate user
-      setTimeout(() => navigate('/nalog'), 2000)
+      setTimeout(() => navigate('/nalog'), 1500)
       // window.location.href = '/nalog'           
     }
   }
