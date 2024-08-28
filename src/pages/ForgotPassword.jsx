@@ -28,7 +28,7 @@ const ForgotPassword = () => {
 
                             {/* reset submit btn */}
                             <button type="submit" className="btn btn-primary">
-                                Reset Password
+                                Nova Šifra
                             </button>
                         </form>
                     </div>

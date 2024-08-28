@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom"
 // data
 import navigationLinks from "../../../data/navigationLinks"
 
+
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
