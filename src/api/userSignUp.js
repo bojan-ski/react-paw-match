@@ -27,6 +27,7 @@ const userSignUp = async (username, email, password) => {
         return true
     } catch (error) {
         //error message
+        // console.log('There was an error, please try again')
         console.log(error);
 
         return false

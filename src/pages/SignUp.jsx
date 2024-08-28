@@ -13,9 +13,9 @@ const SignUp = () => {
     const enteredEmail = e.target.elements[1].value.trim()
     const enteredPassword = e.target.elements[2].value
 
-    console.log(enteredUsername);
-    console.log(enteredEmail);
-    console.log(enteredPassword);
+    // console.log(enteredUsername);
+    // console.log(enteredEmail);
+    // console.log(enteredPassword);
 
     const response = await userSignUp(enteredUsername, enteredEmail, enteredPassword)
 

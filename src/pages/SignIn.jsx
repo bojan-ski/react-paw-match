@@ -1,17 +1,32 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+// api func
+import userSignIn from '../api/userSignIn'
 // components
 import FormInput from '../components/FormInput'
 
 
 const SignIn = () => {
+  const navigate = useNavigate()
+
   const handleSignInUserSubmit = async e => {
     e.preventDefault()
 
     const enteredEmail = e.target.elements[0].value.trim()
     const enteredPassword = e.target.elements[1].value
 
-    console.log(enteredEmail);
-    console.log(enteredPassword);
+    // console.log(enteredEmail);
+    // console.log(enteredPassword);
+
+    const response = await userSignIn(enteredEmail, enteredPassword)
+
+    if (response) {
+      e.target.elements[0].value = ''
+      e.target.elements[1].value = ''
+
+      // navigate user
+      setTimeout(() => navigate('/nalog'), 2000)
+      // window.location.href = '/nalog'           
+    }
   }
 
   return (
