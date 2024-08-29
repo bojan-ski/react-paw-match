@@ -4,13 +4,14 @@
 /* GOOGLE FONT - POPPINS */
 @import url("https://fonts.googleapis.com/css2?family=Limelight&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
 /* ---------- GENERAL ---------- */
 :root {
   /* colors */
   --light-green-color: rgb(39, 201, 39);
   --green-color: rgb(27, 134, 27);
 
+  /* shadow */
+  --dark-shadow: 0px 4px 26px 0px rgba(0, 0, 0, 0.07);
 }
 
 * {
@@ -30,36 +31,40 @@ body {
   background-color: #fafafa;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.capitalize{
+.capitalize {
   text-transform: capitalize;
 }
 
-.btn:active{
+.btn:active {
   transform: scale(0.95);
+}
+
+textarea {
+  resize: none;
 }
 
 /* -------------------- APP (SHARED) COMPONENTS -------------------- */
 
 /* -------------------- APP COMPONENTS -------------------- */
 /* ---------- HEADER ---------- */
-header{
+header {
   background-color: var(--light-green-color);
 }
 
 /* Onboarding component */
-.onboarding .onboarding-btn{
+.onboarding .onboarding-btn {
   font-size: 0.8rem;
 }
 
 /* Navbar component */
-.navbar .navbar-nav .nav-item a.active{
+.navbar .navbar-nav .nav-item a.active {
   font-weight: 500;
   color: var(--green-color);
-} 
+}
 
 /* ---------- MAIN ---------- */
 main {
@@ -69,7 +74,7 @@ main {
 /* Login page / Sign Up page */
 .sing-up-page form,
 .sing-in-page .sing-in-page-content,
-.forgot-password-page .forgot-password-content{
+.forgot-password-page .forgot-password-content {
   max-width: 700px;
   margin: 0 auto;
   box-shadow: 3px 3px 50px rgba(0, 0, 0, 0.1);
@@ -79,19 +84,46 @@ main {
 .sing-in-page-page-footer p,
 .sing-in-page-page-footer a,
 .forgot-password-page .forgot-password-footer p,
-.forgot-password-page .forgot-password-footer a{
+.forgot-password-page .forgot-password-footer a {
   font-size: 0.8rem;
 }
 
 /* Profile page */
-.profile-page-options button:hover{
+.profile-page-options button:hover {
   background-color: var(--light-green-color);
 }
 
-.profile-page-options .selected-profile-page-options{
+.profile-page-options .selected-profile-page-options {
   background-color: var(--light-green-color);
   color: #fff;
 }
 
+/* PostNewPetListing component */
+.post-new-listing .post-new-listing-form {
+  box-shadow: var(--dark-shadow);
+}
+
+.form-btn,
+.form-btn-active {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  margin-right: 7px;
+  border-radius: 5px;
+}
+
+.form-btn {
+  background-color: #fff;
+  border: 1px solid var(--light-green-color);
+}
+
+.form-btn-active {
+  background-color: var(--light-green-color);
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+.post-new-listing .post-new-listing-form .new-listing-btn-options button{
+
+}
 
 /* ---------- FOOTER ---------- */
