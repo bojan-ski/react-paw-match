@@ -9,6 +9,8 @@ import Loading from '../../pages/Loading'
 // components
 import PostNewListingButtonGroup from "./PostNewListingButtonGroup";
 import PostNewListingInputField from "./PostNewListingInputField";
+// toastify
+import { toast } from "react-toastify";
 
 
 const PostNewPetListing = () => {
@@ -77,7 +79,7 @@ const PostNewPetListing = () => {
     setIsLoading(true)
 
     if (!petProfileImage) {
-      console.error("Profilna slika ljubimca je obavezna.");
+      toast.warning("Profilna slika ljubimca je obavezna.");
 
       // spinner
       setIsLoading(false)
@@ -85,7 +87,7 @@ const PostNewPetListing = () => {
     }
 
     if (petImagesGallery.length === 0) {
-      console.error("Morate dodati barem jednu sliku u galeriji.");
+      toast.warning("Morate dodati barem jednu sliku u galeriji.");
 
       // spinner
       setIsLoading(false)
@@ -112,23 +114,53 @@ const PostNewPetListing = () => {
         setIsLoading(false)
 
         // error message in case there is a problem with uploading images
-        console.error('Greška prilikom otpremanja slika, molimo Vas probajte ponovo')
+        toast.error('Greška prilikom otpremanja slika, molimo Vas probajte ponovo')
 
         return
       })
 
-      // post new listing
+      // post new listing to DB
       // console.log(listingFormData, imageUrls);
-      await publishNewListing(listingFormData, petProfileImageUrl, petImagesGalleryUrls)      
+      const response = await publishNewListing(listingFormData, petProfileImageUrl, petImagesGalleryUrls)
 
       // spinner
       setIsLoading(false)
+
+      if (response) {
+        // success message
+        toast.success('Uspešno ste postavili Vaš oglas')
+
+        // setListingFormData({
+        //   userRef: userProfileDetails.userID,
+        //   listingCreatedBy: userProfileDetails.userName,
+        //   petProfileImage: null,
+        //   petType: 'pas',
+        //   petBread: '',
+        //   petGender: 'muško',
+        //   petAge: '2010',
+        //   petWeight: '',
+        //   petEnergyLevel: 'nisko',
+        //   goodWithChildren: 'da',
+        //   goodWithOtherPets: 'da',
+        //   specialNeeds: 'ne',
+        //   specialNeedsDescription: '',
+        //   petAddress: '',
+        //   petLocation: '',
+        //   petImagesGallery: [],
+        //   contactFullName: '',
+        //   contactPhoneNumber: '',
+        //   contactEmailAddress: '',
+        // });
+
+        // after the user has posted a new listing, the user is redirected to the Dashboard page
+        // window.location.href = '/'
+      }
     } else {
       // spinner
       setIsLoading(false)
 
       // error message if one or more images are over 1MB
-      console.error('Ograničenje za otpremanje slike je do 1MB, molimo Vas probajte ponovo')
+      toast.warning('Ograničenje za otpremanje slike je do 1MB, molimo Vas probajte ponovo')
 
       return
     }

@@ -6,6 +6,8 @@ import Loading from "./Loading"
 // components
 import Header from "../components/appLayout/header/Header"
 import Footer from "../components/appLayout/footer/Footer"
+// toastify
+import { ToastContainer } from 'react-toastify';
 
 
 const AppLayout = () => {
@@ -23,6 +25,11 @@ const AppLayout = () => {
 
                 <Footer />
             </>
+            <ToastContainer
+                position="top-center"
+                autoClose={2500}
+                pauseOnFocusLoss={false}
+            />
         </AppProvider>
     )
 }

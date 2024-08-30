@@ -1,15 +1,14 @@
 // firebase/firestore funcs
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // uuid
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 // store images in firebase
 const storeUploadedImage = async (storageFile, uploadedImage, userName, contactEmailAddress) => {
     return new Promise((resolve, reject) => {
         const storage = getStorage();
 
-        // const uploadedImageName = `${uuidv4()}-${uploadedImage.name}`;
-        const uploadedImageName = `${uploadedImage.name}`;
+        const uploadedImageName = `${uuidv4()}-${uploadedImage.name}`;
 
         const storageRef = ref(storage, `${storageFile}/${userName}-${contactEmailAddress}/${uploadedImageName}`);
 

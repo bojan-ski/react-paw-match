@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 // bootstrap css
 import "/node_modules/bootstrap/dist/js/bootstrap.bundle.js";
+// toastify css
+import '/node_modules/react-toastify/dist/ReactToastify.css';
 // app
 import App from './App.jsx'
 
