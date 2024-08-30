@@ -1,6 +1,9 @@
 import { useState } from "react";
 // context
 import { useGlobalContext } from "../../context";
+// api func
+import storeUploadedImage from "../../api/storeUploadedImage";
+import publishNewListing from "../../api/publishNewListing";
 // page
 import Loading from '../../pages/Loading'
 // components
@@ -15,6 +18,7 @@ const PostNewPetListing = () => {
   const [listingFormData, setListingFormData] = useState({
     userRef: userProfileDetails.userID,
     listingCreatedBy: userProfileDetails.userName,
+    petProfileImage: null,
     petType: 'pas',
     petBread: '',
     petGender: 'muško',
@@ -33,7 +37,7 @@ const PostNewPetListing = () => {
     contactEmailAddress: '',
   });
 
-  const { petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petAddress, petLocation, petImagesGallery, contactFullName, contactPhoneNumber, contactEmailAddress } = listingFormData
+  const { petProfileImage, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petAddress, petLocation, petImagesGallery, contactFullName, contactPhoneNumber, contactEmailAddress } = listingFormData
 
 
   const onMutate = (e) => {
@@ -41,21 +45,23 @@ const PostNewPetListing = () => {
 
     if (id === 'petImagesGallery') {
       const newFiles = Array.from(files).slice(0, 5 - petImagesGallery.length);
-
       setListingFormData(prevState => ({
         ...prevState,
         [id]: [...prevState.petImagesGallery, ...newFiles]
       }));
-
-      // Clear the input (file) value to if user re-uploads
       e.target.value = '';
+    } else if (id === 'petProfileImage') {
+      setListingFormData(prevState => ({
+        ...prevState,
+        petProfileImage: files[0]
+      }));
     } else {
       setListingFormData(prevState => ({
         ...prevState,
         [id]: value.toLowerCase()
       }));
     }
-  }
+  };
 
   const removeImage = (index) => {
     setListingFormData(prevState => ({
@@ -64,11 +70,68 @@ const PostNewPetListing = () => {
     }));
   }
 
-
-  const handleCreateNewListingSubmit = e => {
+  const handleCreateNewListingSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(listingFormData);
+    // spinner
+    setIsLoading(true)
+
+    if (!petProfileImage) {
+      console.error("Profilna slika ljubimca je obavezna.");
+
+      // spinner
+      setIsLoading(false)
+      return;
+    }
+
+    if (petImagesGallery.length === 0) {
+      console.error("Morate dodati barem jednu sliku u galeriji.");
+
+      // spinner
+      setIsLoading(false)
+      return;
+    }
+
+    // if image/images (gallery) are more then 1MB
+    const correctGalleryImageSize = Array.from(petImagesGallery).every(image => {
+      if (image.size >= 1000000) {
+        return false;
+      }
+      return true;
+    })
+
+    if (correctGalleryImageSize && petProfileImage.size <= 1000000) {
+      // pet profile image
+      const petProfileImageUrl = await storeUploadedImage('petProfileImages', petProfileImage, userProfileDetails.userName, contactEmailAddress)
+
+      // pet images gallery
+      let petImagesGalleryUrls = await Promise.all(
+        [...petImagesGallery].map(petImage => storeUploadedImage('petGalleryImages', petImage, userProfileDetails.userName, contactEmailAddress))
+      ).catch(() => {
+        // spinner
+        setIsLoading(false)
+
+        // error message in case there is a problem with uploading images
+        console.error('Greška prilikom otpremanja slika, molimo Vas probajte ponovo')
+
+        return
+      })
+
+      // post new listing
+      // console.log(listingFormData, imageUrls);
+      await publishNewListing(listingFormData, petProfileImageUrl, petImagesGalleryUrls)      
+
+      // spinner
+      setIsLoading(false)
+    } else {
+      // spinner
+      setIsLoading(false)
+
+      // error message if one or more images are over 1MB
+      console.error('Ograničenje za otpremanje slike je do 1MB, molimo Vas probajte ponovo')
+
+      return
+    }
   }
 
   if (isLoading) return <Loading />
@@ -92,6 +155,43 @@ const PostNewPetListing = () => {
 
               {/* row item 1 */}
               <div className="col-12 col-lg-6">
+
+                {/* pet profile image */}
+                <div className="mb-3">
+                  <label className='form-label fw-bold'>
+                    Profilna Slika - veličine do 1mb
+                  </label>
+
+                  {/* Hidden file input */}
+                  <input
+                    className='d-none'
+                    type='file'
+                    id='petProfileImage'
+                    onChange={onMutate}
+                    accept='.jpg,.png,.jpeg'
+                  />
+
+                  {/* btn to trigger file input */}
+                  <button
+                    type="button"
+                    className="d-block btn btn-primary"
+                    onClick={() => document.getElementById('petProfileImage').click()}
+                  >
+                    Dodaj Profilnu Sliku
+                  </button>
+
+                  {/* Image preview */}
+                  {petProfileImage && (
+                    <div className="mt-3">
+                      <img
+                        src={URL.createObjectURL(petProfileImage)}
+                        alt="Pet Profile"
+                        className="img-thumbnail"
+                        style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                      />
+                    </div>
+                  )}
+                </div>
 
                 {/* pet type */}
                 <PostNewListingButtonGroup
@@ -139,7 +239,7 @@ const PostNewPetListing = () => {
                       <select className="form-select" id='petAge' value={petAge} onChange={onMutate}>
                         {Array.from({ length: 2024 - 2010 + 1 }, (_, idx) => {
                           const year = 2010 + idx;
-                          
+
                           return <option key={year} value={year}>
                             {year}
                           </option>;
@@ -257,7 +357,7 @@ const PostNewPetListing = () => {
                 {/* pet images gallery */}
                 <div className="mb-3">
                   <label className='form-label fw-bold'>
-                    Slike - do 5 slika, veličine do 1MB
+                    Slike - do 5 slika, veličine do 1mb
                   </label>
 
                   {/* Hidden file input */}
