@@ -13,12 +13,14 @@ import Blog from "./pages/Blog.jsx"
 import Contact from "./pages/Contact.jsx"
 import ErrorPage from "./pages/ErrorPage.jsx"
 
+// LOADERS
+import { loader as userPostedListingsLoader } from "./pages/Profile.jsx"
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
       {
         path: '/nalog',
         element: <Profile />,
+        loader: userPostedListingsLoader
       },
       {
         path: '/blog',
