@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useGlobalContext } from "../../context";
 // page
 import Loading from '../../pages/Loading'
+// components
+import PostNewListingButtonGroup from "./PostNewListingButtonGroup";
+import PostNewListingInputField from "./PostNewListingInputField";
 
 
 const PostNewPetListing = () => {
@@ -28,16 +31,36 @@ const PostNewPetListing = () => {
     contactFullName: '',
     contactPhoneNumber: '',
     contactEmailAddress: '',
-  })
+  });
 
   const { petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petAddress, petLocation, petImagesGallery, contactFullName, contactPhoneNumber, contactEmailAddress } = listingFormData
+
 
   const onMutate = (e) => {
     const { files, id, value } = e.target;
 
+    if (id === 'petImagesGallery') {
+      const newFiles = Array.from(files).slice(0, 5 - petImagesGallery.length);
+
+      setListingFormData(prevState => ({
+        ...prevState,
+        [id]: [...prevState.petImagesGallery, ...newFiles]
+      }));
+
+      // Clear the input (file) value to if user re-uploads
+      e.target.value = '';
+    } else {
+      setListingFormData(prevState => ({
+        ...prevState,
+        [id]: value.toLowerCase()
+      }));
+    }
+  }
+
+  const removeImage = (index) => {
     setListingFormData(prevState => ({
       ...prevState,
-      [id]: files ? files : value.toLowerCase()
+      petImagesGallery: prevState.petImagesGallery.filter((_, i) => i !== index)
     }));
   }
 
@@ -48,23 +71,20 @@ const PostNewPetListing = () => {
     console.log(listingFormData);
   }
 
-
-
   if (isLoading) return <Loading />
-
 
   return (
     <section className='post-new-listing'>
+      <div className="post-new-listing-form py-2 rounded-5">
 
-      <div className="post-new-listing-form py-2 rounded-4">
-        {/* new-listing-header */}
+        {/* new listing header */}
         <div className="new-listing-header mb-3">
           <h2 className="text-center fw-bolder">
             Postavi novi oglas
           </h2>
         </div>
 
-        {/* new-listing-body */}
+        {/* new listing body start */}
         <div className="new-listing-body">
 
           <form className="p-4 rounded-5" onSubmit={handleCreateNewListingSubmit}>
@@ -74,361 +94,259 @@ const PostNewPetListing = () => {
               <div className="col-12 col-lg-6">
 
                 {/* pet type */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Tip ljubimca
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={petType === 'pas' ? 'form-btn-active' : 'form-btn'}
-                      id='petType'
-                      value='pas'
-                      onClick={onMutate}
-                    >
-                      Pas
-                    </button>
-                    <button
-                      type='button'
-                      className={petType === 'mačka' ? 'form-btn-active' : 'form-btn'}
-                      id='petType'
-                      value='mačka'
-                      onClick={onMutate}
-                    >
-                      Mačka
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Tip ljubimca'
+                  id='petType'
+                  options={[
+                    { label: 'Pas', value: 'pas' },
+                    { label: 'Mačka', value: 'mačka' }
+                  ]}
+                  selectedValue={petType}
+                  onClick={onMutate}
+                />
 
                 {/* pet bread */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Rasa ljubimca
-                  </label>
-                  <input
-                    className='form-control'
-                    type='text'
-                    id='petBread'
-                    value={petBread}
-                    onChange={onMutate}
-                    maxLength='25'
-                    placeholder="Persijska mačka, Doberman, ..."
-                    required
-                  />
-                </div>
+                <PostNewListingInputField
+                  label='Rasa ljubimca'
+                  id='petBread'
+                  type='text'
+                  placeholder='Persijska mačka, Doberman, ...'
+                  value={petBread}
+                  onChange={onMutate}
+                />
 
                 {/* pet gender */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Rod
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={petGender === 'muško' ? 'form-btn-active' : 'form-btn'}
-                      id='petGender'
-                      value='muško'
-                      onClick={onMutate}
-                    >
-                      Muško
-                    </button>
-                    <button
-                      type='button'
-                      className={petGender === 'žensko' ? 'form-btn-active' : 'form-btn'}
-                      id='petGender'
-                      value='žensko'
-                      onClick={onMutate}
-                    >
-                      Žensko
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Rod'
+                  id='petGender'
+                  options={[
+                    { label: 'Muško', value: 'muško' },
+                    { label: 'Žensko', value: 'žensko' }
+                  ]}
+                  selectedValue={petGender}
+                  onClick={onMutate}
+                />
 
                 {/* pet age & pet weight */}
                 <div className="mb-3">
                   <div className="row">
 
-                    {/* row item 1 - pet age */}
+                    {/* pet age */}
                     <div className="col-6">
                       <label className="form-label fw-bold">
                         Godište
                       </label>
-                      <select className="form-select" id='petAge' onChange={onMutate}>
+                      <select className="form-select" id='petAge' value={petAge} onChange={onMutate}>
                         {Array.from({ length: 2024 - 2010 + 1 }, (_, idx) => {
                           const year = 2010 + idx;
-
-                          return (
-                            <option key={year} value={year}>
-                              {year}
-                            </option>
-                          );
+                          
+                          return <option key={year} value={year}>
+                            {year}
+                          </option>;
                         })}
                       </select>
                     </div>
 
-                    {/* row item 2 - pet weight */}
+                    {/* pet weight */}
                     <div className="col-6">
-                      <label className='form-label fw-bold'>
-                        Težina
-                      </label>
-                      <div className='d-flex align-items-center'>
-                        <input
-                          className='form-control'
-                          type='text'
-                          id='petWeight'
-                          value={petWeight}
-                          onChange={onMutate}
-                          maxLength='2'
-                          placeholder="1/2/5/10..."
-                          required
-                        />
-                        <p className='fw-bold ms-2 mb-0'>kg</p>
-                      </div>
+                      <PostNewListingInputField
+                        label='Težina'
+                        id='petWeight'
+                        type='text'
+                        placeholder='1/2/5/10...'
+                        value={petWeight}
+                        onChange={onMutate}
+                        extraProps={{ maxLength: '2' }}
+                      />
                     </div>
                   </div>
                 </div>
 
                 {/* pet energy level */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Energija ljubimca
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={petEnergyLevel === 'nisko' ? 'form-btn-active' : 'form-btn'}
-                      id='petEnergyLevel'
-                      value='nisko'
-                      onClick={onMutate}
-                    >
-                      Nisko
-                    </button>
-                    <button
-                      type='button'
-                      className={petEnergyLevel === 'srednje' ? 'form-btn-active' : 'form-btn'}
-                      id='petEnergyLevel'
-                      value='srednje'
-                      onClick={onMutate}
-                    >
-                      Srednje
-                    </button>
-                    <button
-                      type='button'
-                      className={petEnergyLevel === 'visoko' ? 'form-btn-active' : 'form-btn'}
-                      id='petEnergyLevel'
-                      value='visoko'
-                      onClick={onMutate}
-                    >
-                      Visoko
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Energija ljubimca'
+                  id='petEnergyLevel'
+                  options={[
+                    { label: 'Nisko', value: 'nisko' },
+                    { label: 'Srednje', value: 'srednje' },
+                    { label: 'Visoko', value: 'visoko' }
+                  ]}
+                  selectedValue={petEnergyLevel}
+                  onClick={onMutate}
+                />
 
                 {/* good with children */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Dobar sa decom
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={goodWithChildren === 'da' ? 'form-btn-active' : 'form-btn'}
-                      id='goodWithChildren'
-                      value='da'
-                      onClick={onMutate}
-                    >
-                      Da
-                    </button>
-                    <button
-                      type='button'
-                      className={goodWithChildren === 'ne' ? 'form-btn-active' : 'form-btn'}
-                      id='goodWithChildren'
-                      value='ne'
-                      onClick={onMutate}
-                    >
-                      Ne
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Dobar sa decom'
+                  id='goodWithChildren'
+                  options={[
+                    { label: 'Da', value: 'da' },
+                    { label: 'Ne', value: 'ne' }
+                  ]}
+                  selectedValue={goodWithChildren}
+                  onClick={onMutate}
+                />
 
                 {/* good with other pets */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Dobar sa ostalim kućnim ljubimcima
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={goodWithOtherPets === 'da' ? 'form-btn-active' : 'form-btn'}
-                      id='goodWithOtherPets'
-                      value='da'
-                      onClick={onMutate}
-                    >
-                      Da
-                    </button>
-                    <button
-                      type='button'
-                      className={goodWithOtherPets === 'ne' ? 'form-btn-active' : 'form-btn'}
-                      id='goodWithOtherPets'
-                      value='ne'
-                      onClick={onMutate}
-                    >
-                      Ne
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Dobar sa ostalim kućnim ljubimcima'
+                  id='goodWithOtherPets'
+                  options={[
+                    { label: 'Da', value: 'da' },
+                    { label: 'Ne', value: 'ne' }
+                  ]}
+                  selectedValue={goodWithOtherPets}
+                  onClick={onMutate}
+                />
 
                 {/* special needs */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Posebne potrebe
-                  </label>
-                  <div className='new-listing-btn-options'>
-                    <button
-                      type='button'
-                      className={specialNeeds === 'da' ? 'form-btn-active' : 'form-btn'}
-                      id='specialNeeds'
-                      value='da'
-                      onClick={onMutate}
-                    >
-                      Da
-                    </button>
-                    <button
-                      type='button'
-                      className={specialNeeds === 'ne' ? 'form-btn-active' : 'form-btn'}
-                      id='specialNeeds'
-                      value='ne'
-                      onClick={onMutate}
-                    >
-                      Ne
-                    </button>
-                  </div>
-                </div>
+                <PostNewListingButtonGroup
+                  label='Posebne potrebe'
+                  id='specialNeeds'
+                  options={[
+                    { label: 'Da', value: 'da' },
+                    { label: 'Ne', value: 'ne' }
+                  ]}
+                  selectedValue={specialNeeds}
+                  onClick={onMutate}
+                />
               </div>
 
               {/* row item 2 */}
               <div className="col-12 col-lg-6">
 
-                {/* special needs - textarea */}
-                {specialNeeds === 'da' && (
+                {/* special needs - description */}
+                {listingFormData.specialNeeds === 'da' && (
                   <div className="mb-3">
                     <label className='form-label fw-bold'>
                       Posebne potrebe - Opis
                     </label>
-                    <textarea className='form-control' id="specialNeedsDescription" value={specialNeedsDescription} onChange={onMutate} maxLength='200' rows={5} placeholder="Opis posebnih potreba ljubimca" required />
+                    <textarea
+                      className='form-control'
+                      id="specialNeedsDescription"
+                      value={specialNeedsDescription}
+                      onChange={onMutate}
+                      maxLength='200'
+                      rows={5}
+                      placeholder="Opis posebnih potreba ljubimca"
+                      required
+                    />
                   </div>
                 )}
 
                 {/* pet address */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Adresa
-                  </label>
-                  <input
-                    className='form-control'
-                    type='text'
-                    id='petAddress'
-                    value={petAddress}
-                    onChange={onMutate}
-                    maxLength='25'
-                    placeholder="Adreasa na kojoj se nalazi kućni ljubimac"
-                    required
-                  />
-                </div>
+                <PostNewListingInputField
+                  label='Adresa'
+                  id='petAddress'
+                  type='text'
+                  placeholder='Adresa na kojoj se nalazi kućni ljubimac'
+                  value={petAddress}
+                  onChange={onMutate}
+                />
 
                 {/* pet location */}
-                <div className="mb-3">
-                  <label className='form-label fw-bold'>
-                    Mesto
-                  </label>
-                  <input
-                    className='form-control'
-                    type='text'
-                    id='petLocation'
-                    value={petLocation}
-                    onChange={onMutate}
-                    maxLength='20'
-                    placeholder="Naziv grada, sela..."
-                    required
-                  />
-                </div>
+                <PostNewListingInputField
+                  label='Mesto'
+                  id='petLocation'
+                  type='text'
+                  placeholder='Naziv grada, sela...'
+                  value={petLocation}
+                  onChange={onMutate}
+                />
 
                 {/* pet images gallery */}
                 <div className="mb-3">
                   <label className='form-label fw-bold'>
                     Slike - do 5 slika, veličine do 1MB
                   </label>
+
+                  {/* Hidden file input */}
                   <input
-                    className='form-control'
+                    className='d-none'
                     type='file'
                     id='petImagesGallery'
                     onChange={onMutate}
                     accept='.jpg,.png,.jpeg'
                     multiple
-                  // required
+                    disabled={petImagesGallery.length >= 5}
                   />
+
+                  {/* btn to trigger file input */}
+                  <button
+                    type="button"
+                    className="d-block btn btn-primary"
+                    onClick={() => document.getElementById('petImagesGallery').click()}
+                    disabled={petImagesGallery.length >= 5}
+                  >
+                    Dodaj Slike
+                  </button>
                 </div>
 
-                {/* contact info*/}
-                <div className="my-5">
-                  <h4 className="fw-bold">
-                    Kontakt informacije:
-                  </h4>
-
-                  {/* owner full name */}
-                  <div className="mb-3">
-                    <label className='form-label fw-bold'>
-                      Vaše ime i prezime
-                    </label>
-                    <input
-                      className='form-control'
-                      type='text'
-                      id='contactFullName'
-                      value={contactFullName}
-                      onChange={onMutate}
-                      maxLength='25'
-                      placeholder="Petar Petrović"
-                      required
-                    />
-                  </div>
-
-                  {/* contact phone */}
-                  <div className="mb-3">
-                    <label className='form-label fw-bold'>
-                      Telefon
-                    </label>
-                    <div className="input-group">
-                      <span className="input-group-text" id="phone-number">+381</span>
-                      <input
-                        className='form-control'
-                        type='number'
-                        id='contactPhoneNumber'
-                        aria-describedby="phone-number"
-                        value={contactPhoneNumber}
-                        onChange={onMutate}
-                        placeholder="601112222, 11222333"
-                        required
+                {/* Image preview section */}
+                <div className="image-preview mb-3 d-flex align-items-center">
+                  {petImagesGallery.length > 0 && petImagesGallery.map((file, index) => (
+                    <div key={index} className="image-item">
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt={`preview-${index}`}
+                        className="img-thumbnail me-2"
+                        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                       />
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => removeImage(index)}
+                      >
+                        R
+                      </button>
                     </div>
-                  </div>
+                  ))}
+                </div>
 
-                  {/* contact email */}
-                  <div>
-                    <label className='form-label fw-bold'>
-                      Email adresa
-                    </label>
+                {/* Contact information */}
+                <h4 className="fw-bold mt-5 mb-3">
+                  Kontakt informacije:
+                </h4>
+
+                {/* contact full name */}
+                <PostNewListingInputField
+                  label='Vaše ime i prezime'
+                  id='contactFullName'
+                  type='text'
+                  placeholder='Petar Petrović'
+                  value={contactFullName}
+                  onChange={onMutate}
+                />
+
+                {/* contact phone number */}
+                <div className="mb-3">
+                  <label className='form-label fw-bold'>
+                    Telefon
+                  </label>
+                  <div className="input-group">
+                    <span className="input-group-text" id="phone-number">+381</span>
                     <input
                       className='form-control'
-                      type='email'
-                      id='contactEmailAddress'
-                      value={contactEmailAddress}
+                      type='number'
+                      id='contactPhoneNumber'
+                      aria-describedby="phone-number"
+                      value={contactPhoneNumber}
                       onChange={onMutate}
-                      maxLength='30'
-                      placeholder="email@gmail.com"
+                      placeholder="601112222, 11222333"
                       required
                     />
                   </div>
                 </div>
+
+                {/* contact email address */}
+                <PostNewListingInputField
+                  label='Email adresa'
+                  id='contactEmailAddress'
+                  type='email'
+                  placeholder='email@gmail.com'
+                  value={contactEmailAddress}
+                  onChange={onMutate}
+                />
               </div>
             </div>
 
@@ -439,12 +357,12 @@ const PostNewPetListing = () => {
               </button>
             </div>
           </form>
-
         </div>
-      </div>
+        {/* new listing body end */}
 
+      </div>
     </section>
-  )
+  );
 }
 
 export default PostNewPetListing
