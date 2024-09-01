@@ -9,11 +9,11 @@ import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
 
 
-
 // LOADER
 export const loader = async () => {
   const allUserPostedListings = await fetchUserListingsFromFirebase()    
   // console.log(allUserPostedListings);
+  console.log('Profile page - LOADER');  
   return allUserPostedListings
 }
 

@@ -7,6 +7,7 @@ import publishNewListing from "../../api/publishNewListing";
 // page
 import Loading from '../../pages/Loading'
 // components
+import SectionHeader from "../SectionHeader";
 import PostNewListingButtonGroup from "./PostNewListingButtonGroup";
 import PostNewListingInputField from "./PostNewListingInputField";
 // toastify
@@ -31,6 +32,7 @@ const PostNewPetListing = () => {
     goodWithOtherPets: 'da',
     specialNeeds: 'ne',
     specialNeedsDescription: '',
+    petDescription: '',
     petAddress: '',
     petLocation: '',
     petImagesGallery: [],
@@ -39,7 +41,7 @@ const PostNewPetListing = () => {
     contactEmailAddress: '',
   });
 
-  const { petProfileImage, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petAddress, petLocation, petImagesGallery, contactFullName, contactPhoneNumber, contactEmailAddress } = listingFormData
+  const { petProfileImage, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGallery, contactFullName, contactPhoneNumber, contactEmailAddress } = listingFormData
 
 
   const onMutate = (e) => {
@@ -173,11 +175,7 @@ const PostNewPetListing = () => {
       <div className="post-new-listing-form py-2 rounded-5">
 
         {/* new listing header */}
-        <div className="new-listing-header mb-3">
-          <h2 className="text-center fw-bolder">
-            Postavi novi oglas
-          </h2>
-        </div>
+        <SectionHeader title='Postavi novi oglas' marginBot='mb-3'/>
 
         {/* new listing body start */}
         <div className="new-listing-body">
@@ -318,6 +316,10 @@ const PostNewPetListing = () => {
                   selectedValue={goodWithChildren}
                   onClick={onMutate}
                 />
+              </div>
+
+              {/* row item 2 */}
+              <div className="col-12 col-lg-6">
 
                 {/* good with other pets */}
                 <PostNewListingButtonGroup
@@ -342,10 +344,6 @@ const PostNewPetListing = () => {
                   selectedValue={specialNeeds}
                   onClick={onMutate}
                 />
-              </div>
-
-              {/* row item 2 */}
-              <div className="col-12 col-lg-6">
 
                 {/* special needs - description */}
                 {listingFormData.specialNeeds === 'da' && (
@@ -359,12 +357,29 @@ const PostNewPetListing = () => {
                       value={specialNeedsDescription}
                       onChange={onMutate}
                       maxLength='200'
-                      rows={5}
+                      rows={4}
                       placeholder="Opis posebnih potreba ljubimca"
                       required
                     />
                   </div>
                 )}
+
+                {/* pet description */}
+                <div className="mb-3">
+                  <label className='form-label fw-bold'>
+                    Dodatne informacije
+                  </label>
+                  <textarea
+                    className='form-control'
+                    id="petDescription"
+                    value={petDescription}
+                    onChange={onMutate}
+                    maxLength='200'
+                    rows={4}
+                    placeholder="Dodatne informacije vezanih za ljubimca"
+                    required
+                  />
+                </div>
 
                 {/* pet address */}
                 <PostNewListingInputField
@@ -415,7 +430,7 @@ const PostNewPetListing = () => {
                 </div>
 
                 {/* Image preview section */}
-                <div className="image-preview mb-3 d-flex align-items-center">
+                <div className="images-preview mb-3 d-flex align-items-center">
                   {petImagesGallery.length > 0 && petImagesGallery.map((file, index) => (
                     <div key={index} className="image-item">
                       <img
@@ -434,9 +449,13 @@ const PostNewPetListing = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* row item 3 */}
+              <div className="col-12">
 
                 {/* Contact information */}
-                <h4 className="fw-bold mt-5 mb-3">
+                <h4 className="fw-bold mt-4 mb-3">
                   Kontakt informacije:
                 </h4>
 
@@ -479,11 +498,12 @@ const PostNewPetListing = () => {
                   value={contactEmailAddress}
                   onChange={onMutate}
                 />
+
               </div>
             </div>
 
             {/* submit btn */}
-            <div className="submit-button text-center">
+            <div className="submit-button text-center mt-3">
               <button type='submit' className='px-5 py-3 fw-bold text-white btn btn-success'>
                 Objavi Oglas
               </button>
