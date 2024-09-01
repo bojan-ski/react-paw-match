@@ -18,7 +18,7 @@ export const loader = async () => {
 }
 
 const Profile = () => {
-  const [selectedProfilePageOption, setSelectedProfilePageOption] = useState('new-listing')
+  const [selectedProfilePageOption, setSelectedProfilePageOption] = useState('my-listings')
   // console.log(selectedProfilePageOption);
 
   return (
@@ -30,9 +30,9 @@ const Profile = () => {
 
         <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
-        {selectedProfilePageOption == 'new-listing' && <PostNewPetListing />}
-
         {selectedProfilePageOption == 'my-listings' && <MyPetListings />}
+
+        {selectedProfilePageOption == 'new-listing' && <PostNewPetListing />}
 
         {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings />}
       </div>

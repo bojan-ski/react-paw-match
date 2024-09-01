@@ -4,6 +4,14 @@ const PetDataBox = ({ petData }) => {
     return (
         <>
             <p className="mb-2 fw-bold text-muted">
+                Tip ljubica:
+                <span className="ms-2 text-dark capitalize">{petType}</span>
+            </p>
+            <p className="mb-2 fw-bold text-muted">
+                Rasa:
+                <span className="ms-2 text-dark capitalize">{petBread}</span>
+            </p>
+            <p className="mb-2 fw-bold text-muted">
                 Godište:
                 <span className="ms-2 text-dark capitalize">{petAge}</span>
             </p>

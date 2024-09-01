@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 // api func
 import fetchSelectedPetListingDetailsFromFirebase from "../api/fetchSelectedPetListingDetailsFromFirebase";
@@ -8,6 +9,8 @@ import PetProfileImageBox from "../components/selectedPetListingPage/PetProfileI
 import PetDataBox from "../components/selectedPetListingPage/PetDataBox";
 import AdditionalPetInformationBox from "../components/selectedPetListingPage/AdditionalPetInformationBox";
 import ContactInformationBox from "../components/selectedPetListingPage/ContactInformationBox";
+import PetImagesGallery from "../components/selectedPetListingPage/PetImagesGallery";
+import SelectedPetImageModal from "../modal/SelectedPetImageModal";
 
 
 // LOADER
@@ -21,8 +24,9 @@ export const loader = async ({ params }) => {
 const SelectedPetListing = () => {
     const selectedPetListingDetails = useLoaderData()
     // console.log(selectedPetListingDetails);
-
     const { petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = selectedPetListingDetails
+
+    const [petImageSrc, setPetImageSrc] = useState('')
 
     let backPath = window.location.pathname.split('/').includes('nalog') ? '/nalog' : '/';
 
@@ -36,16 +40,16 @@ const SelectedPetListing = () => {
                 <section className="mb-5 d-flex align-items-center justify-content-between">
                     <BackButton backPath={backPath} />
 
-                    <h3 className="fw-bold capitalize">
+                    {/* <h3 className="fw-bold capitalize">
                         {petType}
-                    </h3>
+                    </h3> */}
                 </section>
 
-                <section>
+                <section className="">
                     <div className="row">
 
                         {/* row item 1 */}
-                        <div className="col-12 col-md-6 mb-4">
+                        <div className="col-12 col-md-6 mb-4 pet-profile-img">
                             <PetProfileImageBox petProfileImageUrl={petProfileImageUrl} petBread={petBread} />
                         </div>
 
@@ -71,7 +75,18 @@ const SelectedPetListing = () => {
                             <ContactInformationBox contactFullName={contactFullName} contactEmailAddress={contactEmailAddress} contactPhoneNumber={contactPhoneNumber} />
                         </div>
 
-                        
+                        {/* row item 6 */}
+                        <div className="col-12 mb-4">
+                            <h6 className="text-center text-muted mb-3">
+                                Kliknite na sliku radi bolje preglednosti
+                            </h6>
+
+                            {/* Pet Images Gallery - component */}
+                            <PetImagesGallery imageUrls={petImagesGalleryUrls} setImageSrc={setPetImageSrc} />
+
+                            {/* SelectedPetImageModal - modal */}
+                            <SelectedPetImageModal imageSrc={petImageSrc} />
+                        </div>
                     </div>
                 </section>
             </div>
