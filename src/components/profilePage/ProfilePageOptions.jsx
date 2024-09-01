@@ -10,7 +10,7 @@ const ProfilePageOptions = ({selectedProfilePageOption, setSelectedProfilePageOp
             </button>
 
             <button className={`btn border px-3 ${selectedProfilePageOption == 'bookmarked-listings' && 'selected-profile-page-options'}`} onClick={() => setSelectedProfilePageOption('bookmarked-listings')}>
-                Objavi novi oglas
+                Sačuvani oglasi
             </button>
         </section>
     )
