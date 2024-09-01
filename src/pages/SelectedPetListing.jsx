@@ -5,6 +5,9 @@ import fetchSelectedPetListingDetailsFromFirebase from "../api/fetchSelectedPetL
 import PageHeader from "../components/PageHeader";
 import BackButton from "../components/BackButton";
 import PetProfileImageBox from "../components/selectedPetListingPage/PetProfileImageBox";
+import PetDataBox from "../components/selectedPetListingPage/PetDataBox";
+import AdditionalPetInformationBox from "../components/selectedPetListingPage/AdditionalPetInformationBox";
+import ContactInformationBox from "../components/selectedPetListingPage/ContactInformationBox";
 
 
 // LOADER
@@ -31,7 +34,7 @@ const SelectedPetListing = () => {
             <div className="container">
 
                 <section className="mb-5 d-flex align-items-center justify-content-between">
-                    <BackButton backPath='/nalog' />
+                    <BackButton backPath={backPath} />
 
                     <h3 className="fw-bold capitalize">
                         {petType}
@@ -42,72 +45,35 @@ const SelectedPetListing = () => {
                     <div className="row">
 
                         {/* row item 1 */}
-                        <div className="col-6 mb-4">
-                            <PetProfileImageBox petProfileImageUrl={petProfileImageUrl} petBread={petBread}/>
+                        <div className="col-12 col-md-6 mb-4">
+                            <PetProfileImageBox petProfileImageUrl={petProfileImageUrl} petBread={petBread} />
                         </div>
 
                         {/* row item 2 */}
-                        <div className="col-6 mb-4">
-
+                        <div className="col-12 col-md-6 mb-4">
+                            <PetDataBox petData={selectedPetListingDetails}/>
                         </div>
 
                         {/* row item 3 */}
                         {specialNeeds === 'da' && (
                             <div className="col-12 pb-4 mb-4 border-bottom">
-                                <h6 className="fw-bold">
-                                    Specijalne potrebe:
-                                </h6>
-                                <p className="mb-0">
-                                    {specialNeedsDescription}
-                                </p>
+                                <AdditionalPetInformationBox title='Specijalne potrebe - opis:' description={specialNeedsDescription} />
                             </div>
                         )}
 
                         {/* row item 4 */}
                         <div className="col-12 pb-4 mb-4 border-bottom">
-                            <h6 className="fw-bold">
-                                Dodatne informacije:
-                            </h6>
-                            <p className="mb-0">
-                                {petDescription}
-                            </p>
+                            <AdditionalPetInformationBox title='Dodatne informacije:' description={petDescription} />
                         </div>
 
                         {/* row item 5 */}
                         <div className="col-12 pb-4 mb-4 border-bottom">
-                            <h4 className="mb-3 fw-bold">
-                                Kontakt informacije:
-                            </h4>
-                            <p className='mb-0 fw-bold text-muted'>
-                                Ime vlasnika:
-                                <span className='capitalize ms-2 text-dark'>{contactFullName}</span>
-                            </p>
-                            <p className='mb-0 fw-bold text-muted'>
-                                Email:
-                                <span className='ms-2 text-dark'>{contactEmailAddress}</span>
-                            </p>
-                            <p className='mb-0 fw-bold text-muted'>
-                                Telefon:
-                                <span className='ms-2 text-dark'>+381 {contactPhoneNumber}</span>
-                            </p>
+                            <ContactInformationBox contactFullName={contactFullName} contactEmailAddress={contactEmailAddress} contactPhoneNumber={contactPhoneNumber} />
                         </div>
 
-                        {/* row item 6 */}
-                        <div className="col-12 mb-4">
-                            <h6 className="text-center text-muted mb-3">
-                                Kliknite na sliku radi bolje preglednosti
-                            </h6>
-
-                            {/* ImgsGallery - component */}
-                            {/* <ImagesGallery imageUrls={imageUrls} setImageSrc={setImageSrc} /> */}
-
-                            {/* SelectedImageModal - modal */}
-                            {/* <SelectedImageModal imageSrc={imageSrc} /> */}
-                        </div>
-
+                        
                     </div>
                 </section>
-
             </div>
         </div>
     )
