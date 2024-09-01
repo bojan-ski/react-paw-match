@@ -58,7 +58,7 @@ export const AppProvider = ({ children }) => {
 
     return <AppContext.Provider value={{
         navigate, //
-        userProfileDetails, // Onboarding, PostNewPetListing
+        userProfileDetails, // Onboarding, PostNewPetListing, SelectedPetListing
         logOutUser, // Onboarding
     }}>
         {children}

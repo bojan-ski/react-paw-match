@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 // api func
 import fetchSelectedPetListingDetailsFromFirebase from "../api/fetchSelectedPetListingDetailsFromFirebase";
+// context
+import { useGlobalContext } from "../context";
 // components
 import PageHeader from "../components/PageHeader";
 import BackButton from "../components/BackButton";
@@ -11,6 +13,8 @@ import AdditionalPetInformationBox from "../components/selectedPetListingPage/Ad
 import ContactInformationBox from "../components/selectedPetListingPage/ContactInformationBox";
 import PetImagesGallery from "../components/selectedPetListingPage/PetImagesGallery";
 import SelectedPetImageModal from "../modal/SelectedPetImageModal";
+import DeletePetListing from "../components/selectedPetListingPage/DeletePetListing";
+
 
 
 // LOADER
@@ -24,11 +28,19 @@ export const loader = async ({ params }) => {
 const SelectedPetListing = () => {
     const selectedPetListingDetails = useLoaderData()
     // console.log(selectedPetListingDetails);
-    const { petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = selectedPetListingDetails
+    const { userRef, petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = selectedPetListingDetails
+
+    const { userProfileDetails } = useGlobalContext()
+    // console.log(userProfileDetails.userID);
+    const params = useParams()
+    // console.log(params.id);    
 
     const [petImageSrc, setPetImageSrc] = useState('')
 
     let backPath = window.location.pathname.split('/').includes('nalog') ? '/nalog' : '/';
+
+    // console.log(userProfileDetails.userID == userRef);
+
 
     return (
         <div className="selected-pet-listing-page">
@@ -40,9 +52,15 @@ const SelectedPetListing = () => {
                 <section className="mb-5 d-flex align-items-center justify-content-between">
                     <BackButton backPath={backPath} />
 
-                    {/* <h3 className="fw-bold capitalize">
-                        {petType}
-                    </h3> */}
+                    {userProfileDetails.userID == userRef ? (
+                        <>
+                            <DeletePetListing petListingID={params.id} petProfileImageUrl={petProfileImageUrl} petImagesGalleryUrls={petImagesGalleryUrls}/>
+                        </>
+                    ) : (
+                        <>
+                            
+                        </>
+                    )}
                 </section>
 
                 <section className="">
@@ -55,7 +73,7 @@ const SelectedPetListing = () => {
 
                         {/* row item 2 */}
                         <div className="col-12 col-md-6 mb-4">
-                            <PetDataBox petData={selectedPetListingDetails}/>
+                            <PetDataBox petData={selectedPetListingDetails} />
                         </div>
 
                         {/* row item 3 */}
