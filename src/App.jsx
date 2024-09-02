@@ -33,27 +33,27 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: 'sign-up',
+        path: '/registracija',
         element: <SignUp />,
       },
       {
-        path: '/terms-and-conditions',
+        path: '/pravila-koriscenja',
         element: <TermsAndConditions />,
       },
       {
-        path: '/privacy-policy',
+        path: '/pravila-privatnosti',
         element: <PrivacyPolicy />,
       },
       {
-        path: 'sign-in',
+        path: '/prijava',
         element: <SignIn />,
       },
       {
-        path: 'forgot-password',
+        path: '/nova-sifra',
         element: <ForgotPassword />,
       },
       {
-        path: 'oglasi',
+        path: '/oglasi',
         element: <PetListings />,
         loader: allPetListingsLoader
       },

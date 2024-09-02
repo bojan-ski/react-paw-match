@@ -1,6 +1,4 @@
 import { useState } from "react";
-// context
-import { useGlobalContext } from "../../context";
 // api func
 import storeUploadedImage from "../../api/storeUploadedImage";
 import publishNewListing from "../../api/publishNewListing";
@@ -14,9 +12,7 @@ import PostNewListingInputField from "./PostNewListingInputField";
 import { toast } from "react-toastify";
 
 
-const PostNewPetListing = () => {
-  const { userProfileDetails } = useGlobalContext()
-
+const PostNewPetListing = ({ userProfileDetails }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [listingFormData, setListingFormData] = useState({
     userRef: userProfileDetails.userID,
@@ -175,7 +171,7 @@ const PostNewPetListing = () => {
       <div className="post-new-listing-form py-2 rounded-5">
 
         {/* new listing header */}
-        <SectionHeader title='Postavi novi oglas' marginBot='mb-3'/>
+        <SectionHeader title='Postavi novi oglas' marginBot='mb-3' />
 
         {/* new listing body start */}
         <div className="new-listing-body">

@@ -9,15 +9,23 @@ const Onboarding = () => {
   return (
     <div className="onboarding text-end mb-3">
       {userProfileDetails?.userName ? (
-        <button className='btn-danger onboarding-btn btn me-3' onClick={logOutUser}>
-          Odjavi se
-        </button>
+        <div className="d-flex align-items-center justify-content-end">
+          <p className="text-white mb-0">
+            Hello
+            <span className="capitalize fw-bold mx-3">
+              {userProfileDetails.userName}
+            </span>
+          </p>
+          <button className='btn-danger onboarding-btn btn me-3' onClick={logOutUser}>
+            Odjavi se
+          </button>
+        </div>
       ) : (
         <>
-          <Link to='/sign-up' className='btn-info onboarding-btn btn me-3'>
+          <Link to='/registracija' className='btn-info onboarding-btn btn me-3'>
             Napravi nalog
           </Link>
-          <Link to='/sign-in' className='btn-info onboarding-btn btn me-3'>
+          <Link to='/prijava' className='btn-info onboarding-btn btn me-3'>
             Prijavi se
           </Link>
         </>

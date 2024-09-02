@@ -1,6 +1,8 @@
 import { useState } from "react"
 // api func
 import fetchUserListingsFromFirebase from "../api/fetchUserListingsFromFirebase";
+// context
+import { useGlobalContext } from "../context";
 // components
 import PageHeader from "../components/PageHeader"
 import ProfilePageOptions from "../components/profilePage/profilePageOptions";
@@ -11,30 +13,43 @@ import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListin
 
 // LOADER
 export const loader = async () => {
-  const allUserPostedListings = await fetchUserListingsFromFirebase()    
+  const allUserPostedListings = await fetchUserListingsFromFirebase()
   // console.log(allUserPostedListings);
-  console.log('Profile page - LOADER');  
+  console.log('Profile page - LOADER');
   return allUserPostedListings
 }
 
 const Profile = () => {
+  const { userProfileDetails } = useGlobalContext()
   const [selectedProfilePageOption, setSelectedProfilePageOption] = useState('my-listings')
   // console.log(selectedProfilePageOption);
 
   return (
     <div className="profile-page">
-
-      <PageHeader title='Profile' />
-
       <div className="container">
 
-        <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
+        {userProfileDetails.userName ? (
+          <>
+            <PageHeader title={`👋 ${userProfileDetails.userName}`} />
 
-        {selectedProfilePageOption == 'my-listings' && <MyPetListings />}
+            <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
-        {selectedProfilePageOption == 'new-listing' && <PostNewPetListing />}
+            {selectedProfilePageOption == 'my-listings' && <MyPetListings />}
 
-        {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings />}
+            {selectedProfilePageOption == 'new-listing' && <PostNewPetListing userProfileDetails={userProfileDetails} />}
+
+            {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings />}
+          </>
+        ) : (
+          <div className="text-center py-5">
+            <h1 className="fw-bold">
+              Trenutno niste prijavljeni
+            </h1>
+            <h3 className="text-muted mb-5">
+              Molimo Vas prijavite se
+            </h3>
+          </div>
+        )}
       </div>
     </div>
   )

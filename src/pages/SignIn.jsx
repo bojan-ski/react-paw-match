@@ -58,7 +58,7 @@ const SignIn = () => {
             <p className='fw-bold'>
               Zaboravili ste lozinku?
             </p>
-            <Link to='/forgot-password' className="btn btn-warning">
+            <Link to='/nova-sifra' className="btn btn-warning">
               Nova lozinka
             </Link>
           </div>

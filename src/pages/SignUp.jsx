@@ -51,10 +51,10 @@ const SignUp = () => {
           <FormInput label='Šifra' name="signUpPassword" type='password' required={true} minLength={6} />
 
           {/* Terms & Conditions checkbox */}
-          <FormInputCheckbox linkTitle='Pravila korišćenja' linkUrl='terms-and-conditions' />
+          <FormInputCheckbox linkTitle='Pravila korišćenja' linkUrl='pravila-koriscenja' />
 
           {/* Privacy Policy checkbox */}
-          <FormInputCheckbox linkTitle='Pravila privatnosti' linkUrl='privacy-policy' />
+          <FormInputCheckbox linkTitle='Pravila privatnosti' linkUrl='pravila-privatnosti' />
 
           {/* sign up submit btn */}
           <button type="submit" className="btn btn-primary mt-2">

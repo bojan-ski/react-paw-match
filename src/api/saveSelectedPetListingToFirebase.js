@@ -5,13 +5,14 @@ import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 
 
-const saveSelectedPetListingToFirebase = async (userID, petListing) => {
+const saveSelectedPetListingToFirebase = async (userID, petListingID, petListingDetails) => {
     // console.log(userID);
     // console.log(petListing);
 
     try {
         const petListingData = {
-            ...petListing,
+            petListingID,
+            petListingDetails,
             timestamp: serverTimestamp()
         }
 

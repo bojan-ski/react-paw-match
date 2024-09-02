@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 // api func
 import fetchSelectedPetListingDetailsFromFirebase from "../api/fetchSelectedPetListingDetailsFromFirebase";
+import fetchUserBookmarkedPetListingsFromFirebase from "../api/fetchUserBookmarkedPetListingsFromFirebase";
 // context
 import { useGlobalContext } from "../context";
 // components
@@ -17,17 +18,20 @@ import DeletePetListing from "../components/selectedPetListingPage/DeletePetList
 import BookmarkOption from "../components/selectedPetListingPage/BookmarkOption";
 
 
-
 // LOADER
 export const loader = async ({ params }) => {
     const selectedPetListingDetails = await (fetchSelectedPetListingDetailsFromFirebase(params.id))
     // console.log(selectedPetListingDetails);
+
+    const userBookmarkedPetListings = await fetchUserBookmarkedPetListingsFromFirebase()
+    // console.log(userBookmarkedPetListings);
+
     console.log('Selected Pet Listing page - LOADER');
-    return selectedPetListingDetails
+    return { selectedPetListingDetails, userBookmarkedPetListings }
 }
 
 const SelectedPetListing = () => {
-    const selectedPetListingDetails = useLoaderData()
+    const { selectedPetListingDetails, userBookmarkedPetListings } = useLoaderData()
     // console.log(selectedPetListingDetails);
     const { userRef, petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = selectedPetListingDetails
 
@@ -58,7 +62,7 @@ const SelectedPetListing = () => {
                         </>
                     ) : (
                         <>
-                            <BookmarkOption userProfileDetails={userProfileDetails} selectedPetListingDetails={selectedPetListingDetails}/>
+                            <BookmarkOption userProfileDetails={userProfileDetails} userBookmarkedPetListings={userBookmarkedPetListings} petListingID={params.id} selectedPetListingDetails={selectedPetListingDetails} />
                         </>
                     )}
                 </section>
