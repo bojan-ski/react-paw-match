@@ -14,6 +14,7 @@ import ContactInformationBox from "../components/selectedPetListingPage/ContactI
 import PetImagesGallery from "../components/selectedPetListingPage/PetImagesGallery";
 import SelectedPetImageModal from "../modal/SelectedPetImageModal";
 import DeletePetListing from "../components/selectedPetListingPage/DeletePetListing";
+import BookmarkOption from "../components/selectedPetListingPage/BookmarkOption";
 
 
 
@@ -37,7 +38,7 @@ const SelectedPetListing = () => {
 
     const [petImageSrc, setPetImageSrc] = useState('')
 
-    let backPath = window.location.pathname.split('/').includes('nalog') ? '/nalog' : '/';
+    let backPath = window.location.pathname.split('/').includes('nalog') ? '/nalog' : '/oglasi';
 
     // console.log(userProfileDetails.userID == userRef);
 
@@ -54,11 +55,11 @@ const SelectedPetListing = () => {
 
                     {userProfileDetails.userID == userRef ? (
                         <>
-                            <DeletePetListing petListingID={params.id} petProfileImageUrl={petProfileImageUrl} petImagesGalleryUrls={petImagesGalleryUrls}/>
+                            <DeletePetListing petListingID={params.id} petProfileImageUrl={petProfileImageUrl} petImagesGalleryUrls={petImagesGalleryUrls} />
                         </>
                     ) : (
                         <>
-                            
+                            <BookmarkOption />
                         </>
                     )}
                 </section>

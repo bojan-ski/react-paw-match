@@ -8,6 +8,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy"
 import TermsAndConditions from "./pages/TermsAndConditions"
 import SignIn from "./pages/SignIn.jsx"
 import ForgotPassword from "./pages/ForgotPassword.jsx"
+import PetListings from "./pages/PetListings.jsx"
 import SelectedPetListing from "./pages/SelectedPetListing.jsx"
 import Profile from "./pages/Profile.jsx"
 import Blog from "./pages/Blog.jsx"
@@ -15,8 +16,10 @@ import Contact from "./pages/Contact.jsx"
 import ErrorPage from "./pages/ErrorPage.jsx"
 
 // LOADERS
+import { loader as allPetListingsLoader } from "./pages/PetListings.jsx"
 import { loader as selectedPetListingLoader } from "./pages/SelectedPetListing.jsx"
 import { loader as userPostedListingsLoader } from "./pages/Profile.jsx"
+
 
 
 const router = createBrowserRouter([
@@ -48,6 +51,16 @@ const router = createBrowserRouter([
       {
         path: 'forgot-password',
         element: <ForgotPassword />,
+      },
+      {
+        path: 'oglasi',
+        element: <PetListings />,
+        loader: allPetListingsLoader
+      },
+      {
+        path: '/oglasi/:id',
+        element: <SelectedPetListing />,
+        loader: selectedPetListingLoader
       },
       {
         path: '/nalog',
