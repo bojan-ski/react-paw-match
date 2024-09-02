@@ -42,7 +42,6 @@ const SelectedPetListing = () => {
 
     // console.log(userProfileDetails.userID == userRef);
 
-
     return (
         <div className="selected-pet-listing-page">
 
@@ -59,7 +58,7 @@ const SelectedPetListing = () => {
                         </>
                     ) : (
                         <>
-                            <BookmarkOption />
+                            <BookmarkOption userProfileDetails={userProfileDetails} selectedPetListingDetails={selectedPetListingDetails}/>
                         </>
                     )}
                 </section>
