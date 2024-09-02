@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 
-const PetListingGridViewCard = ({ petPostedListing }) => {
-    // console.log(petPostedListing);
-    const { petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = petPostedListing.data
+
+const PetListingGridViewCard = ({ petPostedListingID, petPostedListingData }) => {
+    // console.log(petPostedListingID);
+    // console.log(petPostedListingData);
+    const { petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = petPostedListingData
     
     return (
         <div className="col-12 col-md-6 col-lg-4 mb-4">
 
-            <Link to={`${petPostedListing.id}`} className="text-dark">
+            <Link to={`${petPostedListingID}`} className="text-dark">
                 <div className="card-details rounded rounded-3 p-2">
 
                     <div className="card-details-header text-center mb-2">

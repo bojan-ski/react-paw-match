@@ -5,7 +5,7 @@ import PetListingGridViewCard from '../PetListingGridViewCard';
 
 
 const MyPetListings = () => {
-  const allUserPostedListings = useLoaderData()
+  const { allUserPostedListings } = useLoaderData()
   // console.log(allUserPostedListings);
 
   return (
@@ -13,10 +13,10 @@ const MyPetListings = () => {
       {allUserPostedListings && allUserPostedListings.length > 0 ? (
         <>
           {/* new listing header */}
-          <SectionHeader title='Moji oglasi' marginBot='mb-4'/>
+          <SectionHeader title='Moji oglasi' marginBot='mb-4' />
 
           <div className='row'>
-            {allUserPostedListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListing={userPostedListing} />)}
+            {allUserPostedListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data}/>)}
           </div>
         </>
       ) : (

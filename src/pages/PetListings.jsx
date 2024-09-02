@@ -26,7 +26,7 @@ const PetListings = () => {
 
                 {allPostedPetListings && allPostedPetListings.length > 0 ? (
                     <div className='row'>
-                        {allPostedPetListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListing={userPostedListing} />)}
+                        {allPostedPetListings.map(petListing => <PetListingGridViewCard key={petListing.id} petPostedListingID={petListing.id} petPostedListingData={petListing.data} />)}
                     </div>
                 ) : (
                     <h2 className="fw-bold text-center">
