@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom'
 // components
 import SectionHeader from '../SectionHeader';
 import PetListingGridViewCard from '../PetListingGridViewCard';
-import { useState } from 'react';
 
 
 const BookmarkedPetListings = () => {

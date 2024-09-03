@@ -16,7 +16,6 @@ import Contact from "./pages/Contact.jsx"
 import ErrorPage from "./pages/ErrorPage.jsx"
 
 // LOADERS
-import { loader as allPetListingsLoader } from "./pages/PetListings.jsx"
 import { loader as selectedPetListingLoader } from "./pages/SelectedPetListing.jsx"
 import { loader as userPostedListingsLoader } from "./pages/Profile.jsx"
 
@@ -55,7 +54,6 @@ const router = createBrowserRouter([
       {
         path: '/oglasi',
         element: <PetListings />,
-        loader: allPetListingsLoader
       },
       {
         path: '/oglasi/:id',

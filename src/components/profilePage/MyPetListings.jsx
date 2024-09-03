@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom'
 // components
 import SectionHeader from '../SectionHeader';
@@ -8,15 +9,17 @@ const MyPetListings = () => {
   const { allUserPostedListings } = useLoaderData()
   // console.log(allUserPostedListings);
 
+  const [userPostedPetListings, setUserPostedPetListings] = useState(allUserPostedListings)
+
   return (
     <section className='user-posted-listings'>
-      {allUserPostedListings && allUserPostedListings.length > 0 ? (
+      {userPostedPetListings && userPostedPetListings.length > 0 ? (
         <>
           {/* new listing header */}
           <SectionHeader title='Moji oglasi' marginBot='mb-4' />
 
           <div className='row'>
-            {allUserPostedListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data}/>)}
+            {userPostedPetListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data}/>)}
           </div>
         </>
       ) : (

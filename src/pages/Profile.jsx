@@ -34,7 +34,7 @@ const Profile = () => {
 
         {userProfileDetails.userName ? (
           <>
-            <PageHeader title={`👋 ${userProfileDetails.userName}`} />
+            <PageHeader title={`Pozdrav 👋 ${userProfileDetails.userName.toUpperCase()}`} />
 
             <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
