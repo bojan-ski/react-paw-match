@@ -38,11 +38,11 @@ const Profile = () => {
 
             <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
-            {selectedProfilePageOption == 'my-listings' && <MyPetListings />}
+            {selectedProfilePageOption == 'my-listings' && <MyPetListings userProfileDetails={userProfileDetails}/>}
 
             {selectedProfilePageOption == 'new-listing' && <PostNewPetListing userProfileDetails={userProfileDetails} />}
 
-            {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings />}
+            {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings userProfileDetails={userProfileDetails}/>}
           </>
         ) : (
           <div className="text-center py-5">

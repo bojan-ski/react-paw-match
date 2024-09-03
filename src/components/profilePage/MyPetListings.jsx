@@ -1,15 +1,30 @@
-import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom'
+import { useEffect } from 'react';
+// firebase func
+import { collection, where } from 'firebase/firestore';
+import { db } from '../../firebase.config';
+// custom hook
+import useFetchProfilePageData from '../../hooks/useFetchProfilePageData';
 // components
 import SectionHeader from '../SectionHeader';
 import PetListingGridViewCard from '../PetListingGridViewCard';
+import PaginationApi from '../PaginationApi';
 
 
-const MyPetListings = () => {
-  const { allUserPostedListings } = useLoaderData()
-  // console.log(allUserPostedListings);
+const MyPetListings = ({ userProfileDetails }) => {
+  const itemsPerPage = 1;
+  const providedQuery = [
+    collection(db, 'listings'),
+    where('userRef', '==', userProfileDetails.userID),
+  ]
+  const { listings: userPostedPetListings, fetchListings, page } = useFetchProfilePageData(itemsPerPage, providedQuery);
 
-  const [userPostedPetListings, setUserPostedPetListings] = useState(allUserPostedListings)
+  // Fetch the first page on mount
+  useEffect(() => {
+    console.log('MyPetListings component - useEffect');
+
+    fetchListings();
+  }, [])
+
 
   return (
     <section className='user-posted-listings'>
@@ -19,8 +34,10 @@ const MyPetListings = () => {
           <SectionHeader title='Moji oglasi' marginBot='mb-4' />
 
           <div className='row'>
-            {userPostedPetListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data}/>)}
+            {userPostedPetListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data} />)}
           </div>
+
+          <PaginationApi itemsPerPage={itemsPerPage} listings={userPostedPetListings} fetchListings={fetchListings} page={page}/>
         </>
       ) : (
         <h2 className="fw-bold text-center">
