@@ -17,8 +17,6 @@ import ErrorPage from "./pages/ErrorPage.jsx"
 
 // LOADERS
 import { loader as selectedPetListingLoader } from "./pages/SelectedPetListing.jsx"
-import { loader as userPostedListingsLoader } from "./pages/Profile.jsx"
-
 
 
 const router = createBrowserRouter([
@@ -63,7 +61,6 @@ const router = createBrowserRouter([
       {
         path: '/nalog',
         element: <Profile />,
-        loader: userPostedListingsLoader
       },
       {
         path: '/nalog/:id',

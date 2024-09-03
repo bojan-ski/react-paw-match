@@ -1,7 +1,4 @@
 import { useState } from "react"
-// api func
-import fetchUserListingsFromFirebase from "../api/fetchUserListingsFromFirebase";
-import fetchUserBookmarkedPetListingsFromFirebase from "../api/fetchUserBookmarkedPetListingsFromFirebase";
 // context
 import { useGlobalContext } from "../context";
 // components
@@ -12,16 +9,6 @@ import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
 
 
-// LOADER
-export const loader = async () => {
-  const allUserPostedListings = await fetchUserListingsFromFirebase()
-  // console.log(allUserPostedListings);
-
-  const userBookmarkedPetListings = await fetchUserBookmarkedPetListingsFromFirebase()
-  // console.log(userBookmarkedPetListings);
-  console.log('Profile page - LOADER');
-  return {allUserPostedListings, userBookmarkedPetListings}
-}
 
 const Profile = () => {
   const { userProfileDetails } = useGlobalContext()

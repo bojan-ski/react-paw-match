@@ -7,7 +7,6 @@ import PetListingGridViewCard from "../components/PetListingGridViewCard";
 import PaginationApi from "../components/PaginationApi";
 
 
-
 const PetListings = () => {
     const itemsPerPage = 3;
     const { listings, fetchListings, page } = usePostedPetListings(itemsPerPage);
