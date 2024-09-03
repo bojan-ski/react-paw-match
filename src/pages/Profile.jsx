@@ -9,7 +9,6 @@ import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
 
 
-
 const Profile = () => {
   const { userProfileDetails } = useGlobalContext()
   const [selectedProfilePageOption, setSelectedProfilePageOption] = useState('my-listings')

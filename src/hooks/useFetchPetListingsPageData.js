@@ -1,51 +1,57 @@
 import { useState } from "react";
 // firebase func
-import { getAuth } from "firebase/auth";
 import { collection, query, orderBy, startAfter, limit, getDocs, where } from "firebase/firestore";
 import { db } from "../firebase.config";
 // toastify
 import { toast } from "react-toastify";
 
-const useFetchProfilePageData = (itemsPerPage, providedQueryParams) => {   
-    // console.log(providedQueryParams);    
-    const auth = getAuth()
 
+const useFetchPetListingsPageData = (itemsPerPage) => {
     const [listings, setListings] = useState([]);
     const [lastVisible, setLastVisible] = useState(null);
     const [page, setPage] = useState(0);
 
-
-    // const userPetListings = query(
-    //     collection(db, 'listings'),
-    //     where('userRef', '==', auth.currentUser.uid),
-    //     orderBy('timestamp', 'desc'),
-    //     limit(itemsPerPage)
-    // );
-
-    // const bookmarkedPetListingsQuery = query(
-    //     collection(db, `users/${auth.currentUser.uid}/bookmarkedPetListings`),
-    //     orderBy('timestamp', 'desc'),
-    //     limit(itemsPerPage)
-    // );
-
-
-    const fetchListings = async (pageNumber = 0, reset = false) => {
+    const fetchListings = async (pageNumber = 0, conditions = '', reset = false) => {
         try {
+            let additionalQueryParams = [
+                collection(db, 'listings'),
+                orderBy('timestamp', 'desc'),
+                limit(itemsPerPage),
+            ]
+
+            const { petType, petGender, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, petAge } = conditions
+
+            if (petType && petType !== "--") {
+                additionalQueryParams.push(where('petType', '==', petType));
+            }
+            if (petGender && petGender !== "--") {
+                additionalQueryParams.push(where('petGender', '==', petGender));
+            }
+            if (petEnergyLevel && petEnergyLevel !== "--") {
+                additionalQueryParams.push(where('petEnergyLevel', '==', petEnergyLevel));
+            }
+            if (goodWithChildren && goodWithChildren !== "--") {
+                additionalQueryParams.push(where('goodWithChildren', '==', goodWithChildren));
+            }
+            if (goodWithOtherPets && goodWithOtherPets !== "--") {
+                additionalQueryParams.push(where('goodWithOtherPets', '==', goodWithOtherPets));
+            }
+            if (specialNeeds && specialNeeds !== "--") {
+                additionalQueryParams.push(where('specialNeeds', '==', specialNeeds));
+            }
+            if (petAge && petAge !== "--") {
+                additionalQueryParams.push(where('petAge', '==', petAge));
+            }
+
+            // console.log(additionalQueryParams);
+
             let q;
 
             if (reset || pageNumber === 0) {
                 // Fetch the first page or reset to the first page
                 q = query(
-                    ...providedQueryParams,
-                    orderBy('timestamp', 'desc'),
-                    limit(itemsPerPage)
+                    ...additionalQueryParams
                 );
-                // q = query(
-                //     collection(db, 'listings'),
-                //     where('userRef', '==', auth.currentUser.uid),
-                //     orderBy('timestamp', 'desc'),
-                //     limit(itemsPerPage)
-                // );
 
                 // Reset the last visible document when looping back
                 setLastVisible(null);
@@ -53,9 +59,7 @@ const useFetchProfilePageData = (itemsPerPage, providedQueryParams) => {
                 // Fetch the next set based on the last visible document
                 if (lastVisible) {
                     q = query(
-                        ...providedQueryParams,
-                        orderBy('timestamp', 'desc'),
-                        limit(itemsPerPage),
+                        ...additionalQueryParams,
                         startAfter(lastVisible),
                     );
                 }
@@ -66,7 +70,7 @@ const useFetchProfilePageData = (itemsPerPage, providedQueryParams) => {
             // Check if the end of the collection is reached
             if (querySnapshot.docs.length == 0 && pageNumber !== 0) {
                 // Loop back to the first page
-                fetchListings(0, true);
+                fetchListings(0, conditions, true);
                 return;
             }
 
@@ -88,4 +92,4 @@ const useFetchProfilePageData = (itemsPerPage, providedQueryParams) => {
     return { listings, fetchListings, page };
 }
 
-export default useFetchProfilePageData
+export default useFetchPetListingsPageData

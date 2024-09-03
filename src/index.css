@@ -139,6 +139,12 @@ main {
   font-size: 0.8rem;
 }
 
+/* PetListings page */
+/* PetListingsFilterOption component */
+.pet-listings-page .pet-listings-filter-option .form-label{
+  font-size: 0.8rem;
+}
+
 /* SelectedPetListing page */ 
 /* PetProfileImageBox component */
 .selected-pet-listing-page .pet-profile-img img{

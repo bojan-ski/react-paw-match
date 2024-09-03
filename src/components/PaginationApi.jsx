@@ -2,15 +2,17 @@
 import scrollToTop from "../utils/scrollToTop";
 
 
-const PaginationApi = ({ listings, fetchListings, page }) => {
+const PaginationApi = ({ listings, fetchListings, page, conditions }) => {
     const handleNextPage = () => {
-        fetchListings(page + 1);
+        // fetchListings(page + 1, conditions);
+        conditions ? fetchListings(page + 1, conditions): fetchListings(page + 1);
         scrollToTop()
     };
 
     const handlePreviousPage = () => {
         if (page > 0) {
-            fetchListings(page - 1);
+            // fetchListings(page - 1, conditions);
+            conditions ? fetchListings(page - 1, conditions): fetchListings(page - 1);
             scrollToTop()
         }
     };
