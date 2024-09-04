@@ -5,7 +5,8 @@ import PetListingsSearchOption from "./PetListingsSearchOption"
 
 
 const SearchAndFilterOptions = ({ fetchListings, conditions, setConditions }) => {
-    const [disableOption, setDisableOption] = useState(false)    
+    const [selectedConditionOption, setSelectedConditionOption] = useState('search')
+    const [disableOption, setDisableOption] = useState(false)
 
     const handleSetConditionOptions = e => {
         setConditions(curState => ({
@@ -17,7 +18,7 @@ const SearchAndFilterOptions = ({ fetchListings, conditions, setConditions }) =>
     const handleSubmittedConditionOptions = e => {
         e.preventDefault()
         console.log(conditions);
-        
+
         if (conditions != undefined) {
             setDisableOption(true)
 
@@ -35,9 +36,20 @@ const SearchAndFilterOptions = ({ fetchListings, conditions, setConditions }) =>
 
     return (
         <>
-            <PetListingsSearchOption conditions={conditions} disableOption={disableOption} handleSetConditionOptions={handleSetConditionOptions} handleSubmittedConditionOptions={handleSubmittedConditionOptions} handleResetConditionOptions={handleResetConditionOptions} />
+            <section className="pet-listings-select-options mb-3">
+                <button type='button' className={selectedConditionOption == 'search' ? "select-option btn border text-muted me-2" : "btn border text-muted me-2"} onClick={() => setSelectedConditionOption('search')}>
+                    Search
+                </button>
+                <button type='button' className={selectedConditionOption == 'filter' ? "select-option btn border text-muted" : "btn border text-muted"} onClick={() => setSelectedConditionOption('filter')}>
+                    Filter
+                </button>
+            </section>
 
-            <PetListingsFilterOption conditions={conditions} disableOption={disableOption} handleSetConditionOptions={handleSetConditionOptions} handleSubmittedConditionOptions={handleSubmittedConditionOptions} handleResetConditionOptions={handleResetConditionOptions} />
+            {selectedConditionOption == 'search' ? (
+                <PetListingsSearchOption conditions={conditions} disableOption={disableOption} handleSetConditionOptions={handleSetConditionOptions} handleSubmittedConditionOptions={handleSubmittedConditionOptions} handleResetConditionOptions={handleResetConditionOptions} />
+            ) : (
+                <PetListingsFilterOption conditions={conditions} disableOption={disableOption} handleSetConditionOptions={handleSetConditionOptions} handleSubmittedConditionOptions={handleSubmittedConditionOptions} handleResetConditionOptions={handleResetConditionOptions} />
+            )}
         </>
     )
 }

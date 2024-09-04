@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 // custom hook
-import usePostedPetListings from "../hooks/usePostedPetListings";
 import useFetchPetListingsPageData from "../hooks/useFetchPetListingsPageData";
 // components
 import PageHeader from "../components/PageHeader";
@@ -9,13 +8,9 @@ import PetListingGridViewCard from "../components/PetListingGridViewCard";
 import PaginationApi from "../components/PaginationApi";
 
 
-
 const PetListings = () => {
     const itemsPerPage = 3;
-    // const { listings, fetchListings, page } = usePostedPetListings(itemsPerPage);
     const { listings, fetchListings, page } = useFetchPetListingsPageData(itemsPerPage);
-
-    const [conditions, setConditions] = useState()    
 
     // Fetch the first page on mount
     useEffect(() => {
@@ -23,6 +18,9 @@ const PetListings = () => {
 
         fetchListings();
     }, [])
+
+    // search & filter feature - state
+    const [conditions, setConditions] = useState()
 
     return (
         <div className="pet-listings-page">
@@ -41,11 +39,11 @@ const PetListings = () => {
                             </div>
                         </section>
 
-                        <PaginationApi itemsPerPage={itemsPerPage} listings={listings} fetchListings={fetchListings} page={page} conditions={conditions}/>
+                        <PaginationApi itemsPerPage={itemsPerPage} listings={listings} fetchListings={fetchListings} page={page} conditions={conditions} />
                     </>
                 ) : (
                     <h2 className="fw-bold text-center">
-                        Trenutno nemate postavljenih oglasa
+                        Trenutno nema postavljenih oglasa
                     </h2>
                 )}
             </div>

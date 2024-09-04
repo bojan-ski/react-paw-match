@@ -140,6 +140,14 @@ main {
 }
 
 /* PetListings page */
+/* SearchAndFilterOptions component */
+.pet-listings-page .pet-listings-select-options .btn:hover,
+.pet-listings-page .pet-listings-select-options .select-option{
+  background-color: var(--light-green-color);
+  color: #fff !important;
+  font-weight: 500;
+}
+
 /* PetListingsFilterOption component */
 .pet-listings-page .pet-listings-filter-option .form-label{
   font-size: 0.8rem;

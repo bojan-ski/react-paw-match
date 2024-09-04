@@ -1,3 +1,8 @@
+// component
+import PetListingsFilterComponent from "./PetListingsFilterComponent";
+import PetListingsBtnOption from "./PetListingsBtnOption";
+
+
 const PetListingsFilterOption = ({ conditions, disableOption, handleSetConditionOptions, handleSubmittedConditionOptions, handleResetConditionOptions }) => {
     return (
         <section className="pet-listings-filter-option mb-5 pb-3 border-bottom">
@@ -5,7 +10,7 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                 <div className="row align-items-end">
 
                     {/* row item 1 - display selected pet type */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Tip ljubimca:
                         </label>
@@ -14,10 +19,18 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="pas">Pas</option>
                             <option value="mačka">Mačka</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Tip ljubimca:"
+                        value={conditions ? conditions.petType : "--"}
+                        id="petType"
+                        options={["pas", "mačka"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 2 - display selected pet gender */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Rod:
                         </label>
@@ -26,10 +39,18 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="muško">Muško</option>
                             <option value="žensko">Žensko</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Rod:"
+                        value={conditions ? conditions.petGender : "--"}
+                        id="petGender"
+                        options={["muško", "žensko"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 3 - display selected pet energy level */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Energija ljubimca:
                         </label>
@@ -39,10 +60,18 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="srednje">Srednje</option>
                             <option value="visoko">Visoko</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Energija ljubimca:"
+                        value={conditions ? conditions.petEnergyLevel : "--"}
+                        id="petEnergyLevel"
+                        options={["nisko", "srednje", "visoko"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 4 - display good with children option */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Dobar sa decom:
                         </label>
@@ -51,10 +80,18 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Dobar sa decom:"
+                        value={conditions ? conditions.goodWithChildren : "--"}
+                        id="goodWithChildren"
+                        options={["da", "ne"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 5 - display good other pets option */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Dobar sa ostalim kućnim ljubimcima:
                         </label>
@@ -63,10 +100,18 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Dobar sa ostalim kućnim ljubimcima:"
+                        value={conditions ? conditions.goodWithOtherPets : "--"}
+                        id="goodWithOtherPets"
+                        options={["da", "ne"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 6 - display special needs option */}
-                    <div className='col-12 col-md-3 mb-3'>
+                    {/* <div className='col-12 col-md-3 mb-3'>
                         <label className='form-label fw-bold'>
                             Posebne potrebe:
                         </label>
@@ -75,7 +120,15 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
                         </select>
-                    </div>
+                    </div> */}
+                    <PetListingsFilterComponent
+                        label="Posebne potrebe:"
+                        value={conditions ? conditions.specialNeeds : "--"}
+                        id="specialNeeds"
+                        options={["da", "ne"]}
+                        onChange={handleSetConditionOptions}
+                        disabled={disableOption}
+                    />
 
                     {/* row item 7 - display selected pet age */}
                     <div className="col-12 col-md-3 mb-3">
@@ -95,7 +148,9 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                     </div>
 
                     {/* row item 8 - submit/reset buttons */}
-                    {!disableOption && (
+                    <PetListingsBtnOption col='col-md-3' disableOption={disableOption} handleResetConditionOptions={handleResetConditionOptions}/>
+
+                    {/* {!disableOption && (
                         <div className="col-12 col-md-3 mb-3">
                             <button type="submit" className="fw-bold btn btn-primary w-100">
                                 Primeni
@@ -109,7 +164,7 @@ const PetListingsFilterOption = ({ conditions, disableOption, handleSetCondition
                                 Reset
                             </button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </form>
         </section>

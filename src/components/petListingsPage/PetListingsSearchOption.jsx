@@ -1,3 +1,7 @@
+// components
+import PetListingsBtnOption from "./PetListingsBtnOption"
+
+
 const PetListingsSearchOption = ({ conditions, disableOption, handleSetConditionOptions, handleSubmittedConditionOptions, handleResetConditionOptions }) => {
     return (
         <section className="pet-listings-search-option mb-5 pb-3 border-bottom">
@@ -15,7 +19,9 @@ const PetListingsSearchOption = ({ conditions, disableOption, handleSetCondition
                     </div>
 
                     {/* row item 3 - submit/reset buttons */}
-                    {!disableOption && (
+                    <PetListingsBtnOption col='col-md-2' disableOption={disableOption} handleResetConditionOptions={handleResetConditionOptions}/>
+                    
+                    {/* {!disableOption && (
                         <div className="col-12 col-md-2 mb-3">
                             <button type="submit" className="fw-bold btn btn-primary w-100">
                                 Primeni
@@ -29,7 +35,7 @@ const PetListingsSearchOption = ({ conditions, disableOption, handleSetCondition
                                 Reset
                             </button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </form>
         </section>
