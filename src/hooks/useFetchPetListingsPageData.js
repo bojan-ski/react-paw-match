@@ -12,12 +12,23 @@ const useFetchPetListingsPageData = (itemsPerPage) => {
     const [page, setPage] = useState(0);
 
     const fetchListings = async (pageNumber = 0, conditions = '', reset = false) => {
+        console.log(conditions);        
+
         try {
             let additionalQueryParams = [
                 collection(db, 'listings'),
                 orderBy('timestamp', 'desc'),
                 limit(itemsPerPage),
             ]
+
+            const { petBread, petLocation } = conditions
+
+            if (petBread && petBread !== "") {
+                additionalQueryParams.push(where('petBread', '==', petBread));
+            }
+            if (petLocation && petLocation !== "") {
+                additionalQueryParams.push(where('petLocation', '==', petLocation));
+            }
 
             const { petType, petGender, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, petAge } = conditions
 

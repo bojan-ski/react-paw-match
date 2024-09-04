@@ -4,16 +4,18 @@ import usePostedPetListings from "../hooks/usePostedPetListings";
 import useFetchPetListingsPageData from "../hooks/useFetchPetListingsPageData";
 // components
 import PageHeader from "../components/PageHeader";
-import PetListingsFilterOption from "../components/petListingsPage/PetListingsFilterOption";
+import SearchAndFilterOptions from "../components/petListingsPage/SearchAndFilterOptions";
 import PetListingGridViewCard from "../components/PetListingGridViewCard";
 import PaginationApi from "../components/PaginationApi";
+
 
 
 const PetListings = () => {
     const itemsPerPage = 3;
     // const { listings, fetchListings, page } = usePostedPetListings(itemsPerPage);
     const { listings, fetchListings, page } = useFetchPetListingsPageData(itemsPerPage);
-    const [conditions, setConditions] = useState()
+
+    const [conditions, setConditions] = useState()    
 
     // Fetch the first page on mount
     useEffect(() => {
@@ -29,7 +31,7 @@ const PetListings = () => {
 
             <div className="container">
 
-                <PetListingsFilterOption fetchListings={fetchListings} conditions={conditions} setConditions={setConditions}/>
+                <SearchAndFilterOptions fetchListings={fetchListings} conditions={conditions} setConditions={setConditions} />
 
                 {listings && listings.length > 0 ? (
                     <>

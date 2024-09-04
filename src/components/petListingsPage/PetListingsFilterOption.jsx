@@ -1,38 +1,7 @@
-import { useState } from "react"
-
-
-const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) => {
-    const [disableOption, setDisableOption] = useState(false)
-
-    const handleSelectedFilterOption = e => {
-        setConditions(curState => ({
-            ...curState,
-            [e.target.id]: e.target.value
-        }))
-    }
-
-    const handleSubmittedFilterOptions = e => {
-        e.preventDefault()
-
-        if (conditions != undefined) {
-            setDisableOption(true)
-
-
-            fetchListings(0, conditions)
-        }
-    }
-
-    const handleResetFilterOptions = () => {
-        setDisableOption(false)
-
-        setConditions()
-
-        fetchListings()
-    }
-
+const PetListingsFilterOption = ({ conditions, disableOption, handleSetConditionOptions, handleSubmittedConditionOptions, handleResetConditionOptions }) => {
     return (
         <section className="pet-listings-filter-option mb-5 pb-3 border-bottom">
-            <form onSubmit={handleSubmittedFilterOptions}>
+            <form onSubmit={handleSubmittedConditionOptions}>
                 <div className="row align-items-end">
 
                     {/* row item 1 - display selected pet type */}
@@ -40,7 +9,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Tip ljubimca:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.petType} id="petType" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.petType : "--"} id="petType" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="pas">Pas</option>
                             <option value="mačka">Mačka</option>
@@ -52,7 +21,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Rod:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.petGender} id="petGender" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.petGender : "--"} id="petGender" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="muško">Muško</option>
                             <option value="žensko">Žensko</option>
@@ -64,7 +33,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Energija ljubimca:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.petEnergyLevel} id="petEnergyLevel" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.petEnergyLevel : "--"} id="petEnergyLevel" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="nisko">Nisko</option>
                             <option value="srednje">Srednje</option>
@@ -77,7 +46,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Dobar sa decom:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.goodWithChildren} id="goodWithChildren" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.goodWithChildren : "--"} id="goodWithChildren" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
@@ -89,7 +58,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Dobar sa ostalim kućnim ljubimcima:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.goodWithOtherPets} id="goodWithOtherPets" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.goodWithOtherPets : "--"} id="goodWithOtherPets" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
@@ -101,7 +70,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Posebne potrebe:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.specialNeeds} id="specialNeeds" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.specialNeeds : "--"} id="specialNeeds" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             <option value="da">Da</option>
                             <option value="ne">Ne</option>
@@ -113,7 +82,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
                         <label className='form-label fw-bold'>
                             Godište:
                         </label>
-                        <select className="form-select" value={typeof conditions == 'object' && conditions.petAge} id="petAge" onChange={handleSelectedFilterOption} disabled={disableOption}>
+                        <select className="form-select" value={conditions ? conditions.petAge : "--"} id="petAge" onChange={handleSetConditionOptions} disabled={disableOption}>
                             <option value="--">--</option>
                             {Array.from({ length: 2024 - 2010 + 1 }, (_, idx) => {
                                 const year = 2010 + idx;
@@ -136,7 +105,7 @@ const PetListingsFilterOption = ({ fetchListings, conditions, setConditions }) =
 
                     {disableOption && (
                         <div className="col-12 col-md-3 mb-3">
-                            <button type="button" className="fw-bold btn btn-warning text-white w-100" onClick={handleResetFilterOptions}>
+                            <button type="button" className="fw-bold btn btn-warning text-white w-100" onClick={handleResetConditionOptions}>
                                 Reset
                             </button>
                         </div>
