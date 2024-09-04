@@ -12,7 +12,7 @@ const useFetchPetListingsPageData = (itemsPerPage) => {
     const [page, setPage] = useState(0);
 
     const fetchListings = async (pageNumber = 0, conditions = '', reset = false) => {
-        console.log(conditions);        
+        console.log(conditions);
 
         try {
             let additionalQueryParams = [
@@ -21,38 +21,53 @@ const useFetchPetListingsPageData = (itemsPerPage) => {
                 limit(itemsPerPage),
             ]
 
-            const { petBread, petLocation } = conditions
+            // List of conditions to check
+            const conditionKeys = [
+                'petBread', 'petLocation', 'petType', 'petGender',
+                'petEnergyLevel', 'goodWithChildren', 'goodWithOtherPets',
+                'specialNeeds', 'petAge'
+            ];
 
-            if (petBread && petBread !== "") {
-                additionalQueryParams.push(where('petBread', '==', petBread));
-            }
-            if (petLocation && petLocation !== "") {
-                additionalQueryParams.push(where('petLocation', '==', petLocation));
-            }
+            // Apply conditions dynamically
+            conditionKeys.forEach(key => {
+                const value = conditions[key];
+                if (value && value !== "" && value !== "--") {
+                    additionalQueryParams.push(where(key, '==', value));
+                }
+            });
 
-            const { petType, petGender, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, petAge } = conditions
+            // const { petBread, petLocation } = conditions
 
-            if (petType && petType !== "--") {
-                additionalQueryParams.push(where('petType', '==', petType));
-            }
-            if (petGender && petGender !== "--") {
-                additionalQueryParams.push(where('petGender', '==', petGender));
-            }
-            if (petEnergyLevel && petEnergyLevel !== "--") {
-                additionalQueryParams.push(where('petEnergyLevel', '==', petEnergyLevel));
-            }
-            if (goodWithChildren && goodWithChildren !== "--") {
-                additionalQueryParams.push(where('goodWithChildren', '==', goodWithChildren));
-            }
-            if (goodWithOtherPets && goodWithOtherPets !== "--") {
-                additionalQueryParams.push(where('goodWithOtherPets', '==', goodWithOtherPets));
-            }
-            if (specialNeeds && specialNeeds !== "--") {
-                additionalQueryParams.push(where('specialNeeds', '==', specialNeeds));
-            }
-            if (petAge && petAge !== "--") {
-                additionalQueryParams.push(where('petAge', '==', petAge));
-            }
+            // if (petBread && petBread !== "") {
+            //     additionalQueryParams.push(where('petBread', '==', petBread));
+            // }
+            // if (petLocation && petLocation !== "") {
+            //     additionalQueryParams.push(where('petLocation', '==', petLocation));
+            // }
+
+            // const { petType, petGender, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, petAge } = conditions
+
+            // if (petType && petType !== "--") {
+            //     additionalQueryParams.push(where('petType', '==', petType));
+            // }
+            // if (petGender && petGender !== "--") {
+            //     additionalQueryParams.push(where('petGender', '==', petGender));
+            // }
+            // if (petEnergyLevel && petEnergyLevel !== "--") {
+            //     additionalQueryParams.push(where('petEnergyLevel', '==', petEnergyLevel));
+            // }
+            // if (goodWithChildren && goodWithChildren !== "--") {
+            //     additionalQueryParams.push(where('goodWithChildren', '==', goodWithChildren));
+            // }
+            // if (goodWithOtherPets && goodWithOtherPets !== "--") {
+            //     additionalQueryParams.push(where('goodWithOtherPets', '==', goodWithOtherPets));
+            // }
+            // if (specialNeeds && specialNeeds !== "--") {
+            //     additionalQueryParams.push(where('specialNeeds', '==', specialNeeds));
+            // }
+            // if (petAge && petAge !== "--") {
+            //     additionalQueryParams.push(where('petAge', '==', petAge));
+            // }
 
             // console.log(additionalQueryParams);
 
