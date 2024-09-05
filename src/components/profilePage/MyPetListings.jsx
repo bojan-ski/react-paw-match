@@ -37,7 +37,7 @@ const MyPetListings = ({ userProfileDetails }) => {
             {userPostedPetListings.map(userPostedListing => <PetListingGridViewCard key={userPostedListing.id} petPostedListingID={userPostedListing.id} petPostedListingData={userPostedListing.data} />)}
           </div>
 
-          <PaginationApi itemsPerPage={itemsPerPage} listings={userPostedPetListings} fetchListings={fetchListings} page={page}/>
+          <PaginationApi itemsPerPage={itemsPerPage} data={userPostedPetListings} fetchData={fetchListings} page={page}/>
         </>
       ) : (
         <h2 className="fw-bold text-center">

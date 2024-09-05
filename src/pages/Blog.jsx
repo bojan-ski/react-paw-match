@@ -1,20 +1,22 @@
-import { useLoaderData } from "react-router-dom"
+import { useEffect } from "react"
 // api func
-import fetchAllBlogPostsFromFirebase from "../api/fetchAllBlogPostsFromFirebase"
+import useFetchBlogPageData from "../hooks/useFetchBlogPageData"
 //components
 import BlogPostsCard from "../components/blogPage/BlogPostsCard"
 import PageHeader from "../components/PageHeader"
+import PaginationApi from "../components/PaginationApi"
 
-
-// LOADER
-export const loader = async () => {
-  const allBlogPosts = await fetchAllBlogPostsFromFirebase()
-  console.log(allBlogPosts); 
-  return allBlogPosts
-}
 
 const Blog = () => {
-  const allBlogPosts = useLoaderData()
+   const itemsPerPage = 1;
+  const { blogPosts, fetchBlogPosts, page } = useFetchBlogPageData(itemsPerPage);
+
+  // Fetch the first page on mount
+  useEffect(() => {
+    console.log('Blog page - useEffect');
+
+    fetchBlogPosts();
+  }, [])
 
   return (
     <div className="blog-page">
@@ -23,13 +25,15 @@ const Blog = () => {
 
       <div className="container">
 
-        {allBlogPosts && allBlogPosts.length > 0 ? (
+        {blogPosts && blogPosts.length > 0 ? (
           <>
             <section className="blog-posts-list mb-3">
               <div className='row'>
-                {allBlogPosts.map(blogPost => <BlogPostsCard key={blogPost.id} blogPost={blogPost}/>)}
+                {blogPosts.map(blogPost => <BlogPostsCard key={blogPost.id} blogPost={blogPost} />)}
               </div>
             </section>
+
+            <PaginationApi itemsPerPage={itemsPerPage} data={blogPosts} fetchData={fetchBlogPosts} page={page} />
           </>
         ) : (
           <h2 className="fw-bold text-center">

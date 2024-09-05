@@ -36,7 +36,7 @@ const BookmarkedPetListings = ({ userProfileDetails }) => {
             {userBookmarkedPetListingsList.map(userBookmarkedPetListing => <PetListingGridViewCard key={userBookmarkedPetListing.id} petPostedListingID={userBookmarkedPetListing.data.petListingID} petPostedListingData={userBookmarkedPetListing.data.petListingDetails} />)}
           </div>
 
-          <PaginationApi itemsPerPage={itemsPerPage} listings={userBookmarkedPetListingsList} fetchListings={fetchListings} page={page}/>
+          <PaginationApi itemsPerPage={itemsPerPage} data={userBookmarkedPetListingsList} fetchData={fetchListings} page={page}/>
         </>
       ) : (
         <h2 className="fw-bold text-center">

@@ -18,7 +18,6 @@ import ErrorPage from "./pages/ErrorPage.jsx"
 
 // LOADERS
 import { loader as selectedPetListingLoader } from "./pages/SelectedPetListing.jsx"
-import { loader as allBlogPostsLoader } from "./pages/Blog.jsx"
 import { loader as selectedBlogPostLoader } from "./pages/SelectedBlogPost.jsx"
 
 
@@ -73,7 +72,6 @@ const router = createBrowserRouter([
       {
         path: '/blog',
         element: <Blog />,
-        loader: allBlogPostsLoader
       },
       {
         path: '/blog/:id',

@@ -2,17 +2,17 @@
 import scrollToTop from "../utils/scrollToTop";
 
 
-const PaginationApi = ({ listings, fetchListings, page, conditions }) => {
+const PaginationApi = ({ data, fetchData, page, conditions }) => {
     const handleNextPage = () => {
-        // fetchListings(page + 1, conditions);
-        conditions ? fetchListings(page + 1, conditions): fetchListings(page + 1);
+        // fetchData(page + 1, conditions);
+        conditions ? fetchData(page + 1, conditions): fetchData(page + 1);
         scrollToTop()
     };
 
     const handlePreviousPage = () => {
         if (page > 0) {
-            // fetchListings(page - 1, conditions);
-            conditions ? fetchListings(page - 1, conditions): fetchListings(page - 1);
+            // fetchData(page - 1, conditions);
+            conditions ? fetchData(page - 1, conditions): fetchData(page - 1);
             scrollToTop()
         }
     };
@@ -30,7 +30,7 @@ const PaginationApi = ({ listings, fetchListings, page, conditions }) => {
                 <button className="btn btn-primary me-3" onClick={handlePreviousPage} disabled={page === 0}>
                     Prev
                 </button>
-                <button className="btn btn-primary" onClick={handleNextPage} disabled={listings.length === 0}>
+                <button className="btn btn-primary" onClick={handleNextPage} disabled={data.length === 0}>
                     Next
                 </button>
             </div>

@@ -39,7 +39,7 @@ const PetListings = () => {
                             </div>
                         </section>
 
-                        <PaginationApi itemsPerPage={itemsPerPage} listings={listings} fetchListings={fetchListings} page={page} conditions={conditions} />
+                        <PaginationApi itemsPerPage={itemsPerPage} data={listings} fetchData={fetchListings} page={page} conditions={conditions} />
                     </>
                 ) : (
                     <h2 className="fw-bold text-center">
