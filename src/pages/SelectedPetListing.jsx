@@ -67,7 +67,7 @@ const SelectedPetListing = () => {
                     )}
                 </section>
 
-                <section className="">
+                <section>
                     <div className="row">
 
                         {/* row item 1 */}

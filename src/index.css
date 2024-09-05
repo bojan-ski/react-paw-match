@@ -98,9 +98,7 @@ textarea {
   transition: var(--transition-ease);
 }
 
-/* -------------------- APP (SHARED) COMPONENTS -------------------- */
-
-/* -------------------- APP COMPONENTS -------------------- */
+/* -------------------- APP (SINGLE) COMPONENTS -------------------- */
 /* ---------- HEADER ---------- */
 header {
   background-color: var(--light-green-color);
@@ -205,23 +203,22 @@ main {
   
 }
 
+/* -------------------- APP (SHARED) COMPONENTS -------------------- */
 /* PetListingGridViewCard component */
-.card-details{
+.pet-listing-card-details{
   box-shadow: var(--dark-shadow);
 }
 
-.card-details:hover{
+.pet-listing-card-details:hover{
   transform: scale(1.02);
   transition: transform 0.5s ease-in;
   box-shadow: var(--dark-green-shadow);
 }
 
-.card-details .card-details-header img{
+.pet-listing-card-details .pet-listing-card-details-header img{
   height: 300px;
   width: 100%;
   object-fit: cover;
 }
-
-
 
 /* ---------- FOOTER ---------- */
