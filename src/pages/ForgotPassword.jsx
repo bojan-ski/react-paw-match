@@ -52,7 +52,7 @@ const ForgotPassword = () => {
                         <p className="fw-bold">
                             Ne treba Vam nova lozinka?
                         </p>
-                        <Link to='/sign-in' className="btn btn-warning">
+                        <Link to='/prijava' className="btn btn-warning">
                             Prijavi se
                         </Link>
                     </div>

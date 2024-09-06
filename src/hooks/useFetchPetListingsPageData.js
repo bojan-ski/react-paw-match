@@ -12,7 +12,7 @@ const useFetchPetListingsPageData = (itemsPerPage) => {
     const [page, setPage] = useState(0);
 
     const fetchListings = async (pageNumber = 0, conditions = '', reset = false) => {
-        console.log(conditions);
+        // console.log(conditions);
 
         try {
             let additionalQueryParams = [

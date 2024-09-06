@@ -203,6 +203,12 @@ main {
   
 }
 
+/* Contact page */
+.contact-page form{
+  background-color: #fff;
+  box-shadow: var(--dark-shadow);
+}
+
 /* -------------------- APP (SHARED) COMPONENTS -------------------- */
 /* PetListingGridViewCard component */
 .pet-listing-card-details{
