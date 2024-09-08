@@ -18,7 +18,7 @@ const Forum = () => {
         fetchForumMessages();
     }, [])
 
-    // console.log(forumMessages);
+    console.log(forumMessages);
     
 
     return (
