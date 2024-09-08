@@ -1,34 +1,31 @@
 // context
 import { useGlobalContext } from "../../context";
+// components
+import DeleteForumMessage from "./DeleteForumMessage";
+// toastify
+import { toast } from "react-toastify";
 
 
-const ForumMessageCard = ({ forumMessageData }) => {
-    // console.log(forumMessageData);
+const ForumMessageCard = ({ forumMessageID, forumMessageData }) => {
     const { userProfileDetails } = useGlobalContext()
-    // console.log(userProfileDetails.userID);
 
-    const handleDeleteForumMessage = () =>{
-        console.log('handleDeleteForumMessage');
-        
-    }
+    
 
-    const handleReplyToForumMessage = () =>{
+    const handleReplyToForumMessage = () => {
         console.log('handleReplyToForumMessage');
-        
+
     }
 
 
     return (
-        <div className="forum-messages-card py-2 bg-info">
+        <div className="forum-messages-card my-2 py-2 bg-info">
             <div className="mb-3">
                 <h5>
                     {forumMessageData.forumMessage}
                 </h5>
 
                 {forumMessageData.userRef == userProfileDetails.userID ? (
-                    <button className="btn btn-danger" onClick={handleDeleteForumMessage}>
-                        Obriši
-                    </button>
+                    <DeleteForumMessage forumMessageID={forumMessageID}/>
                 ) : (
                     <button className="btn btn-primary" onClick={handleReplyToForumMessage}>
                         Odgovori

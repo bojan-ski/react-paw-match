@@ -8,7 +8,7 @@ import ForumMessageCard from '../components/forumPage/ForumMessageCard';
 
 
 const Forum = () => {
-    const itemsPerPage = 1;
+    const itemsPerPage = 12;
     const { forumMessages, fetchForumMessages, page } = useFetchForumPageData(itemsPerPage);
 
     // Fetch the first page on mount
@@ -18,9 +18,8 @@ const Forum = () => {
         fetchForumMessages();
     }, [])
 
-    console.log(forumMessages);
-
-    const [forumMessage, setForumMessage] = useState({})
+    // console.log(forumMessages);
+    
 
     return (
         <div className='forum-page'>
@@ -33,7 +32,7 @@ const Forum = () => {
 
                 <section className='forum-messages-list mb-3'>
                     <div className='row'>
-                        {forumMessages.map(forumMessage => <ForumMessageCard key={forumMessage.id} forumMessageData={forumMessage.data}/>)}
+                        {forumMessages.map(forumMessage => <ForumMessageCard key={forumMessage.id} forumMessageID={forumMessage.id} forumMessageData={forumMessage.data} />)}
                     </div>
                 </section>
 
