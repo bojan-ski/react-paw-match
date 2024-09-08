@@ -3,6 +3,7 @@ const navigationLinks = [
     {label: 'Oglasi', href: '/oglasi'},
     {label: 'Moj Nalog', href: '/nalog'},
     {label: 'Blog', href: '/blog'},
+    {label: 'Forum', href: '/forum'},
     {label: 'Kontakt', href: '/kontakt'},
 ]
 

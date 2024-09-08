@@ -13,12 +13,14 @@ import SelectedPetListing from "./pages/SelectedPetListing.jsx"
 import Profile from "./pages/Profile.jsx"
 import Blog from "./pages/Blog.jsx"
 import SelectedBlogPost from "./pages/SelectedBlogPost.jsx"
+import Forum from "./pages/Forum.jsx"
 import Contact from "./pages/Contact.jsx"
 import ErrorPage from "./pages/ErrorPage.jsx"
 
 // LOADERS
 import { loader as selectedPetListingLoader } from "./pages/SelectedPetListing.jsx"
 import { loader as selectedBlogPostLoader } from "./pages/SelectedBlogPost.jsx"
+
 
 
 const router = createBrowserRouter([
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
         path: '/blog/:id',
         element: <SelectedBlogPost />,
         loader: selectedBlogPostLoader
+      },
+      {
+        path: '/forum',
+        element: <Forum />,
       },
       {
         path: '/kontakt',
