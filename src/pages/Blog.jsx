@@ -8,7 +8,7 @@ import PaginationApi from "../components/PaginationApi"
 
 
 const Blog = () => {
-   const itemsPerPage = 1;
+  const itemsPerPage = 1;
   const { blogPosts, fetchBlogPosts, page } = useFetchBlogPageData(itemsPerPage);
 
   // Fetch the first page on mount
