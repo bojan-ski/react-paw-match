@@ -3,6 +3,8 @@ import sendForumMessage from "../api/sendForumMessage"
 // components
 import FormInput from "../components/FormInput"
 import OtherUserMessage from "../components/forumPage/OtherUserMessage"
+// utils func
+import closeModalOnSubmit from "../utils/closeModalOnSubmit"
 // toastify
 import { toast } from "react-toastify"
 
@@ -26,6 +28,9 @@ const ReplyToForumMessageModal = ({ userProfileDetails, otherUserMessage }) => {
         if (response) {
             toast.success('Vaša poruka je objavljena')
             e.target.elements[0].value = ''
+
+            // close Modal on Submit
+            closeModalOnSubmit('#replyToForumMessageModal')
         }
     }
 
