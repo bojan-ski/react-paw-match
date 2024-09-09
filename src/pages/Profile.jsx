@@ -7,6 +7,7 @@ import ProfilePageOptions from "../components/profilePage/profilePageOptions";
 import PostNewPetListing from "../components/profilePage/PostNewPetListing";
 import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
+import UserNotLoggedInMessage from "../components/UserNotLoggedInMessage";
 
 
 const Profile = () => {
@@ -24,21 +25,14 @@ const Profile = () => {
 
             <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
-            {selectedProfilePageOption == 'my-listings' && <MyPetListings userProfileDetails={userProfileDetails}/>}
+            {selectedProfilePageOption == 'my-listings' && <MyPetListings userProfileDetails={userProfileDetails} />}
 
             {selectedProfilePageOption == 'new-listing' && <PostNewPetListing userProfileDetails={userProfileDetails} />}
 
-            {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings userProfileDetails={userProfileDetails}/>}
+            {selectedProfilePageOption == 'bookmarked-listings' && <BookmarkedPetListings userProfileDetails={userProfileDetails} />}
           </>
         ) : (
-          <div className="text-center py-5">
-            <h1 className="fw-bold">
-              Trenutno niste prijavljeni
-            </h1>
-            <h3 className="text-muted mb-5">
-              Molimo Vas prijavite se
-            </h3>
-          </div>
+          <UserNotLoggedInMessage />
         )}
       </div>
     </div>

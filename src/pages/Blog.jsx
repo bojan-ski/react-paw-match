@@ -5,6 +5,7 @@ import useFetchBlogPageData from "../hooks/useFetchBlogPageData"
 import BlogPostsCard from "../components/blogPage/BlogPostsCard"
 import PageHeader from "../components/PageHeader"
 import PaginationApi from "../components/PaginationApi"
+import NoDataAvailableMessage from "../components/NoDataAvailableMessage"
 
 
 const Blog = () => {
@@ -36,9 +37,7 @@ const Blog = () => {
             <PaginationApi itemsPerPage={itemsPerPage} data={blogPosts} fetchData={fetchBlogPosts} page={page} />
           </>
         ) : (
-          <h2 className="fw-bold text-center">
-            Trenutno nema objavljenih Blog post-ova
-          </h2>
+          <NoDataAvailableMessage text='Trenutno nema objavljenih Blog post-ova'/>
         )}
       </div>
     </div>

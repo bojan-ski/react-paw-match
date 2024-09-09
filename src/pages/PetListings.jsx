@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader";
 import SearchAndFilterOptions from "../components/petListingsPage/SearchAndFilterOptions";
 import PetListingGridViewCard from "../components/PetListingGridViewCard";
 import PaginationApi from "../components/PaginationApi";
+import NoDataAvailableMessage from "../components/NoDataAvailableMessage";
 
 
 const PetListings = () => {
@@ -42,9 +43,7 @@ const PetListings = () => {
                         <PaginationApi itemsPerPage={itemsPerPage} data={listings} fetchData={fetchListings} page={page} conditions={conditions} />
                     </>
                 ) : (
-                    <h2 className="fw-bold text-center">
-                        Trenutno nema postavljenih oglasa
-                    </h2>
+                    <NoDataAvailableMessage text='Trenutno nema postavljenih oglasa'/>
                 )}
             </div>
         </div>

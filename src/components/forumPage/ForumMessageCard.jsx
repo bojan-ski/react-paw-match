@@ -1,15 +1,11 @@
-// context
-import { useGlobalContext } from "../../context";
 // components
 import OtherUserMessage from "./OtherUserMessage";
 import DeleteForumMessage from "./DeleteForumMessage";
 import ReplyToForumMessage from "./ReplyToForumMessage";
 
 
-const ForumMessageCard = ({ forumMessageID, forumMessageData, fetchForumMessages }) => {
+const ForumMessageCard = ({ userProfileDetails, forumMessageID, forumMessageData, fetchForumMessages }) => {
     // console.log(forumMessageData);
-    const { userProfileDetails } = useGlobalContext()
-
     return (
         <div className="forum-message-card bg-white p-4 rounded-4 my-2">
             {forumMessageData.otherUserMessage && <OtherUserMessage message={forumMessageData.otherUserMessage} />}
