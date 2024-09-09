@@ -8,7 +8,7 @@ import FormInput from "../FormInput"
 import { toast } from "react-toastify"
 
 
-const SendMessageForumForm = () => {
+const SendMessageForumForm = ({ fetchForumMessages }) => {
     const { userProfileDetails } = useGlobalContext()
     // console.log(userProfileDetails);
 
@@ -29,12 +29,15 @@ const SendMessageForumForm = () => {
         if (response) {
             toast.success('Vaša poruka je objavljena')
             e.target.elements[0].value = ''
+
+            //re-fetch forum messages 
+            fetchForumMessages()
         }
     }
 
 
     return (
-        <section className="mb-4 pb-4 border-bottom">
+        <section className="send-message-form mb-4 pb-4 border-bottom">
             <form className="bg-white p-4 rounded-4" onSubmit={handleSendMessage}>
                 <FormInput label='Vasa poruka' name="forumMessage" type='text' required={true} />
 

@@ -1,39 +1,9 @@
-// api func 
-import sendForumMessage from "../api/sendForumMessage"
 // components
 import FormInput from "../components/FormInput"
 import OtherUserMessage from "../components/forumPage/OtherUserMessage"
-// utils func
-import closeModalOnSubmit from "../utils/closeModalOnSubmit"
-// toastify
-import { toast } from "react-toastify"
 
 
-const ReplyToForumMessageModal = ({ userProfileDetails, otherUserMessage }) => {
-    const handleReplyMessage = async e => {
-        e.preventDefault()
-        // console.log(e.target.elements[0].value.trim());
-
-        if (e.target.elements[0].value.trim() == '') return toast.warning('Molimo Vas da unesete validnu poruku.')
-
-        const userForumMessage = {
-            userRef: userProfileDetails.userID,
-            messageCreatedBy: userProfileDetails.userName,
-            otherUserMessage,
-            forumMessage: e.target.elements[0].value.trim()
-        }
-
-        const response = await sendForumMessage(userForumMessage)
-
-        if (response) {
-            toast.success('Vaša poruka je objavljena')
-            e.target.elements[0].value = ''
-
-            // close Modal on Submit
-            closeModalOnSubmit('#replyToForumMessageModal')
-        }
-    }
-
+const ReplyToForumMessageModal = ({ otherUserMessage, handleReplyMessage }) => {   
     return (
         <div className="modal fade" id="replyToForumMessageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="replyToForumMessageModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-md">

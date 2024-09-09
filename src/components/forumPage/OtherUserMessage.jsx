@@ -1,7 +1,7 @@
 const OtherUserMessage = ({message}) => {
     return (
         <div className="mb-3 fst-italic">
-            <p className="bg-info">
+            <p className="">
                 {message}
             </p>
         </div>

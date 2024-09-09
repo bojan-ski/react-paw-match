@@ -5,19 +5,20 @@ import { db } from "../../firebase.config"
 import { toast } from "react-toastify";
 
 
-const DeleteForumMessage = ({ forumMessageID }) => {
+const DeleteForumMessage = ({ forumMessageID, fetchForumMessages }) => {
     const handleDeleteForumMessage = async (forumMessageID) => {
-        console.log('handleDeleteForumMessage');
+        // console.log('handleDeleteForumMessage');
 
         if (window.confirm('Da li ste sigurni da želite da obriše Vašu poruku?')) {
             try {
                 // delete forum message from firebase
-                const response = await deleteDoc(doc(db, 'forumMessages', forumMessageID))
+                await deleteDoc(doc(db, 'forumMessages', forumMessageID))
 
-                if (response) {
-                    // success message
-                    toast.success('Uspešno ste obrisali Vaš oglas');
-                }
+                // success message
+                toast.success('Uspešno ste obrisali Vaš oglas');
+
+                //re-fetch forum messages 
+                fetchForumMessages()
             } catch (error) {
                 console.log(error);
                 //error message

@@ -203,6 +203,17 @@ main {
   
 }
 
+/* Forum page */
+.forum-page .send-message-form form,
+.forum-page .forum-messages-list .forum-message-card{
+  box-shadow: var(--dark-shadow);
+}
+
+/* ForumMessageCard component  */
+.forum-page .forum-messages-list .forum-message-card button{
+  font-size: 0.6rem;
+}
+
 /* Contact page */
 .contact-page form{
   background-color: #fff;

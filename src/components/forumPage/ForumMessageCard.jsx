@@ -6,23 +6,23 @@ import DeleteForumMessage from "./DeleteForumMessage";
 import ReplyToForumMessage from "./ReplyToForumMessage";
 
 
-const ForumMessageCard = ({ forumMessageID, forumMessageData }) => {
+const ForumMessageCard = ({ forumMessageID, forumMessageData, fetchForumMessages }) => {
     // console.log(forumMessageData);
     const { userProfileDetails } = useGlobalContext()
 
     return (
-        <div className="forum-messages-card my-2 py-2 bg-info">
+        <div className="forum-message-card bg-white p-4 rounded-4 my-2">
             {forumMessageData.otherUserMessage && <OtherUserMessage message={forumMessageData.otherUserMessage} />}
 
-            <div className="mb-3">
+            <div className="mb-3 pb-3 border-bottom">
                 <h5>
                     {forumMessageData.forumMessage}
                 </h5>
 
                 {forumMessageData.userRef == userProfileDetails.userID ? (
-                    <DeleteForumMessage forumMessageID={forumMessageID} />
+                    <DeleteForumMessage forumMessageID={forumMessageID} fetchForumMessages={fetchForumMessages}/>
                 ) : (
-                    <ReplyToForumMessage userProfileDetails={userProfileDetails} otherUserMessage={forumMessageData.forumMessage} />
+                    <ReplyToForumMessage userProfileDetails={userProfileDetails} otherUserMessage={forumMessageData.forumMessage} fetchForumMessages={fetchForumMessages}/>
                 )}
             </div>
 
