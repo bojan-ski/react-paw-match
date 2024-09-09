@@ -1,15 +1,16 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 // api func
 import useFetchBlogPageData from "../hooks/useFetchBlogPageData"
 //components
-import BlogPostsCard from "../components/blogPage/BlogPostsCard"
 import PageHeader from "../components/PageHeader"
+import BlogSearchOption from "../components/blogPage/BlogSearchOption"
+import BlogPostsCard from "../components/blogPage/BlogPostsCard"
 import PaginationApi from "../components/PaginationApi"
 import NoDataAvailableMessage from "../components/NoDataAvailableMessage"
 
 
 const Blog = () => {
-  const itemsPerPage = 1;
+  const itemsPerPage = 6;
   const { blogPosts, fetchBlogPosts, page } = useFetchBlogPageData(itemsPerPage);
 
   // Fetch the first page on mount
@@ -19,12 +20,17 @@ const Blog = () => {
     fetchBlogPosts();
   }, [])
 
+  // search feature - state
+  const [searchTerm, setSearchTerm] = useState('')
+
   return (
     <div className="blog-page">
 
       <PageHeader title='Blog' />
 
       <div className="container">
+
+        <BlogSearchOption searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchBlogPosts={fetchBlogPosts} />
 
         {blogPosts && blogPosts.length > 0 ? (
           <>
@@ -34,10 +40,10 @@ const Blog = () => {
               </div>
             </section>
 
-            <PaginationApi itemsPerPage={itemsPerPage} data={blogPosts} fetchData={fetchBlogPosts} page={page} />
+            <PaginationApi itemsPerPage={itemsPerPage} data={blogPosts} fetchData={fetchBlogPosts} page={page} conditions={searchTerm} />
           </>
         ) : (
-          <NoDataAvailableMessage text='Trenutno nema objavljenih Blog post-ova'/>
+          <NoDataAvailableMessage text='Trenutno nema objavljenih Blog post-ova' />
         )}
       </div>
     </div>

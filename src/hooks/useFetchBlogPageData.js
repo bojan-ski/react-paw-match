@@ -1,6 +1,6 @@
 import { useState } from "react";
 // firebase func
-import { collection, query, orderBy, startAfter, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, startAfter, limit, getDocs, where } from "firebase/firestore";
 import { db } from "../firebase.config";
 // toastify
 import { toast } from "react-toastify";
@@ -11,16 +11,24 @@ const useFetchBlogPageData = (itemsPerPage) => {
     const [lastVisible, setLastVisible] = useState(null);
     const [page, setPage] = useState(0);
 
-    const fetchBlogPosts = async (pageNumber = 0, reset = false) => {
+    const fetchBlogPosts = async (pageNumber = 0,  searchTerm = '', reset = false) => {       
         try {
+            let additionalQueryParams = [
+                collection(db, 'blogPosts'),
+                orderBy('timestamp', 'desc'),
+                limit(itemsPerPage),
+            ]
+
+            if (searchTerm && searchTerm.length > 0) {
+                additionalQueryParams.push(where('blogPostTitle', '==', searchTerm));
+            }
+
             let q;
 
             if (reset || pageNumber === 0) {
                 // Fetch the first page or reset to the first page
                 q = query(
-                    collection(db, 'blogPosts'),
-                    orderBy('timestamp', 'desc'),
-                    limit(itemsPerPage)
+                    ...additionalQueryParams
                 );
 
                 // Reset the last visible document when looping back
@@ -29,9 +37,7 @@ const useFetchBlogPageData = (itemsPerPage) => {
                 // Fetch the next set based on the last visible document
                 if (lastVisible) {
                     q = query(
-                        collection(db, 'blogPosts'),
-                        orderBy('timestamp', 'desc'),
-                        limit(itemsPerPage),
+                        ...additionalQueryParams,
                         startAfter(lastVisible),
                     );
                 }
@@ -42,7 +48,7 @@ const useFetchBlogPageData = (itemsPerPage) => {
             // Check if the end of the collection is reached
             if (querySnapshot.docs.length == 0 && pageNumber !== 0) {
                 // Loop back to the first page
-                fetchBlogPosts(0, true);
+                fetchBlogPosts(0, searchTerm, true);
                 return;
             }
 
