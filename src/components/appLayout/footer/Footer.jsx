@@ -1,12 +1,17 @@
-const Footer = () => {
-  const year = new Date().getFullYear()
+// components
+import FooterLinks from "./FooterLinks"
+import FooterRights from "./FooterRights"
 
-  return (
-      <footer className="footer bg-dark text-center text-white">
-          <p className="py-3 mb-0">
-              &copy; {year} BP Development. All rights reserved.
-          </p>
-      </footer>
+
+const Footer = () => {
+  return(
+    <footer className="pt-4 pb-3 footer bg-dark">
+        <div className="container">
+            <FooterLinks/>
+
+            <FooterRights/>
+        </div>
+    </footer>
   )
 }
 

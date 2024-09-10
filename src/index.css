@@ -254,3 +254,18 @@ main {
 }
 
 /* ---------- FOOTER ---------- */
+/* FooterNavLinks component */
+footer .footer-nav-links ul li a:hover{
+  color: var(--green-color) !important;
+}
+
+/* FooterSocialLinks component */
+footer .footer-social-links .footer-social-link a{
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+footer .footer-social-links .footer-social-link a:hover {
+  background-color: var(--green-color);
+  transition: var(--transition-ease);
+}
