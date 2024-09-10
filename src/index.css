@@ -51,7 +51,6 @@ textarea {
   resize: none;
 }
 
-
 /* SWIPER */
 .swiper-slide {
   background-position: center;
@@ -88,8 +87,8 @@ textarea {
   transition: var(--transition-ease);
 }
 
-.swiper:hover .swiper-button-prev.swiper-button-disabled, 
-.swiper:hover .swiper-button-next.swiper-button-disabled{
+.swiper:hover .swiper-button-prev.swiper-button-disabled,
+.swiper:hover .swiper-button-next.swiper-button-disabled {
   opacity: 0.35 !important;
 }
 
@@ -138,28 +137,39 @@ main {
 }
 
 /* Dashboard page */
+.hero {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Hero component */
+.hero .hero-img img {
+  height: 800px;
+  object-fit: cover;
+}
+
 /* Testimonials component */
-.dashboard-page .testimonials .testimonials-carousel .swiper-content{
+.dashboard-page .testimonials .testimonials-carousel .swiper-content {
   box-shadow: var(--dark-shadow);
 }
 
 /* PetListings page */
 /* SearchAndFilterOptions component */
 .pet-listings-page .pet-listings-select-options .btn:hover,
-.pet-listings-page .pet-listings-select-options .select-option{
+.pet-listings-page .pet-listings-select-options .select-option {
   background-color: var(--light-green-color);
   color: #fff !important;
   font-weight: 500;
 }
 
 /* PetListingsFilterOption component */
-.pet-listings-page .pet-listings-filter-option .form-label{
+.pet-listings-page .pet-listings-filter-option .form-label {
   font-size: 0.8rem;
 }
 
-/* SelectedPetListing page */ 
+/* SelectedPetListing page */
 /* PetProfileImageBox component */
-.selected-pet-listing-page .pet-profile-img img{
+.selected-pet-listing-page .pet-profile-img img {
   max-height: 550px;
   width: 100%;
   object-fit: cover;
@@ -205,40 +215,39 @@ main {
   color: #fff;
 }
 
-.post-new-listing .post-new-listing-form .new-listing-btn-options button{
-  
+.post-new-listing .post-new-listing-form .new-listing-btn-options button {
 }
 
 /* Forum page */
 .forum-page .send-message-form form,
-.forum-page .forum-messages-list .forum-message-card{
+.forum-page .forum-messages-list .forum-message-card {
   box-shadow: var(--dark-shadow);
 }
 
 /* ForumMessageCard component  */
-.forum-page .forum-messages-list .forum-message-card button{
+.forum-page .forum-messages-list .forum-message-card button {
   font-size: 0.6rem;
 }
 
 /* Contact page */
-.contact-page form{
+.contact-page form {
   background-color: #fff;
   box-shadow: var(--dark-shadow);
 }
 
 /* -------------------- APP (SHARED) COMPONENTS -------------------- */
 /* PetListingGridViewCard component */
-.pet-listing-card-details{
+.pet-listing-card-details {
   box-shadow: var(--dark-shadow);
 }
 
-.pet-listing-card-details:hover{
+.pet-listing-card-details:hover {
   transform: scale(1.02);
   transition: transform 0.5s ease-in;
   box-shadow: var(--dark-green-shadow);
 }
 
-.pet-listing-card-details .pet-listing-card-details-header img{
+.pet-listing-card-details .pet-listing-card-details-header img {
   height: 300px;
   width: 100%;
   object-fit: cover;

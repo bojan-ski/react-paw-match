@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const DashboardContact = () => {
     return (
-        <section className="text-center mb-5">
+        <section className="text-center">
             <h5 className="mb-3">
                 Ako želite da stupite u kontakt sa nama radi nekog vida saradnje ili želite da podržite naš rad nekom vrstom donacije
             </h5>
