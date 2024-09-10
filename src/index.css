@@ -137,6 +137,12 @@ main {
   font-size: 0.8rem;
 }
 
+/* Dashboard page */
+/* Testimonials component */
+.dashboard-page .testimonials .testimonials-carousel .swiper-content{
+  box-shadow: var(--dark-shadow);
+}
+
 /* PetListings page */
 /* SearchAndFilterOptions component */
 .pet-listings-page .pet-listings-select-options .btn:hover,

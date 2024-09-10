@@ -9,7 +9,7 @@ const Navbar = () => {
             <div className="container-fluid">
                 {/* home btn - link */}
                 <Link to="/" className="fw-bold text-decoration-none text-dark fs-2">
-                    Pruži Dom
+                    PružiDom
                 </Link>
 
                 {/* collapse btn */}
