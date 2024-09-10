@@ -239,6 +239,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                   placeholder='Persijska mačka, Doberman, ...'
                   value={petBread}
                   onChange={onMutate}
+                  maxLength={25}
                 />
 
                 {/* pet gender */}
@@ -274,16 +275,17 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                     </div>
 
                     {/* pet weight */}
-                    <div className="col-6">
+                    <div className="col-6 d-flex justify-content-center align-items-end">
                       <PostNewListingInputField
                         label='Težina'
                         id='petWeight'
-                        type='text'
+                        type='number'
                         placeholder='1/2/5/10...'
                         value={petWeight}
                         onChange={onMutate}
-                        extraProps={{ maxLength: '2' }}
+                        max='99'
                       />
+                      <p className='fw-bold ms-2'>kg</p>
                     </div>
                   </div>
                 </div>
@@ -352,7 +354,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                       id="specialNeedsDescription"
                       value={specialNeedsDescription}
                       onChange={onMutate}
-                      maxLength='200'
+                      maxLength='250'
                       rows={4}
                       placeholder="Opis posebnih potreba ljubimca"
                       required
@@ -370,7 +372,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                     id="petDescription"
                     value={petDescription}
                     onChange={onMutate}
-                    maxLength='200'
+                    maxLength='250'
                     rows={4}
                     placeholder="Dodatne informacije vezanih za ljubimca"
                     required
@@ -385,6 +387,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                   placeholder='Adresa na kojoj se nalazi kućni ljubimac'
                   value={petAddress}
                   onChange={onMutate}
+                  maxLength={30}
                 />
 
                 {/* pet location */}
@@ -395,6 +398,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                   placeholder='Naziv grada, sela...'
                   value={petLocation}
                   onChange={onMutate}
+                  maxLength={20}
                 />
 
                 {/* pet images gallery */}
@@ -426,14 +430,14 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                 </div>
 
                 {/* Image preview section */}
-                <div className="images-preview mb-3 d-flex align-items-center">
+                <div className="images-preview mb-3 d-flex">
                   {petImagesGallery.length > 0 && petImagesGallery.map((file, index) => (
-                    <div key={index} className="image-item">
+                    <div key={index} className="image-item text-center me-3">
                       <img
                         src={URL.createObjectURL(file)}
                         alt={`preview-${index}`}
-                        className="img-thumbnail me-2"
-                        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                        className="img-thumbnail d-block mb-2"
+                        style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                       />
                       <button
                         type="button"
@@ -480,6 +484,7 @@ const PostNewPetListing = ({ userProfileDetails }) => {
                       value={contactPhoneNumber}
                       onChange={onMutate}
                       placeholder="601112222, 11222333"
+                      max='999999999'
                       required
                     />
                   </div>

@@ -17,7 +17,7 @@ const SearchAndFilterOptions = ({ fetchListings, conditions, setConditions }) =>
 
     const handleSubmittedConditionOptions = e => {
         e.preventDefault()
-        console.log(conditions);
+        // console.log(conditions);
 
         if (conditions != undefined) {
             setDisableOption(true)

@@ -6,7 +6,6 @@ import fetchUserBookmarkedPetListingsFromFirebase from "../api/fetchUserBookmark
 // context
 import { useGlobalContext } from "../context";
 // components
-import PageHeader from "../components/PageHeader";
 import BackButton from "../components/BackButton";
 import PetProfileImageBox from "../components/selectedPetListingPage/PetProfileImageBox";
 import PetDataBox from "../components/selectedPetListingPage/PetDataBox";
@@ -20,11 +19,11 @@ import BookmarkOption from "../components/selectedPetListingPage/BookmarkOption"
 
 // LOADER
 export const loader = async ({ params }) => {
-    const selectedPetListingDetails = await (fetchSelectedPetListingDetailsFromFirebase(params.id))
+    const selectedPetListingDetails = await fetchSelectedPetListingDetailsFromFirebase(params.id)
     // console.log(selectedPetListingDetails);
 
     const userBookmarkedPetListings = await fetchUserBookmarkedPetListingsFromFirebase()
-    // console.log(userBookmarkedPetListings);
+    // console.log(userBookmarkedPetListings);    
 
     console.log('Selected Pet Listing page - LOADER');
     return { selectedPetListingDetails, userBookmarkedPetListings }
@@ -36,20 +35,14 @@ const SelectedPetListing = () => {
     const { userRef, petProfileImageUrl, petType, petBread, petGender, petAge, petWeight, petEnergyLevel, goodWithChildren, goodWithOtherPets, specialNeeds, specialNeedsDescription, petDescription, petAddress, petLocation, petImagesGalleryUrls, contactFullName, contactPhoneNumber, contactEmailAddress } = selectedPetListingDetails
 
     const { userProfileDetails } = useGlobalContext()
-    // console.log(userProfileDetails.userID);
-    const params = useParams()
-    // console.log(params.id);    
+    const params = useParams()   
 
     const [petImageSrc, setPetImageSrc] = useState('')
 
     let backPath = window.location.pathname.split('/').includes('nalog') ? '/nalog' : '/oglasi';
 
-    // console.log(userProfileDetails.userID == userRef);
-
     return (
         <div className="selected-pet-listing-page">
-
-            <PageHeader title='Selected Pet Listing' />
 
             <div className="container">
 
@@ -93,12 +86,12 @@ const SelectedPetListing = () => {
                         </div>
 
                         {/* row item 5 */}
-                        <div className="col-12 pb-4 mb-4 border-bottom">
+                        <div className="col-12 col-lg-5 d-flex flex-column justify-content-center mb-4 pb-4 pb-lg-0 border-bottom">
                             <ContactInformationBox contactFullName={contactFullName} contactEmailAddress={contactEmailAddress} contactPhoneNumber={contactPhoneNumber} />
                         </div>
 
                         {/* row item 6 */}
-                        <div className="col-12 mb-4">
+                        <div className="col-12 col-lg-7 mb-4">
                             <h6 className="text-center text-muted mb-3">
                                 Kliknite na sliku radi bolje preglednosti
                             </h6>

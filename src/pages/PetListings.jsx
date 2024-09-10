@@ -10,7 +10,7 @@ import NoDataAvailableMessage from "../components/NoDataAvailableMessage";
 
 
 const PetListings = () => {
-    const itemsPerPage = 3;
+    const itemsPerPage = 6;
     const { listings, fetchListings, page } = useFetchPetListingsPageData(itemsPerPage);
 
     // Fetch the first page on mount
@@ -26,7 +26,7 @@ const PetListings = () => {
     return (
         <div className="pet-listings-page">
 
-            <PageHeader title='Pet Listings' />
+            <PageHeader title='Oglasi' />
 
             <div className="container">
 

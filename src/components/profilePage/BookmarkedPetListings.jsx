@@ -11,7 +11,7 @@ import PaginationApi from '../PaginationApi';
 
 
 const BookmarkedPetListings = ({ userProfileDetails }) => {
-  const itemsPerPage = 1;
+  const itemsPerPage = 6;
   const providedQuery = [
     collection(db, `users/${userProfileDetails.userID}/bookmarkedPetListings`),
   ]

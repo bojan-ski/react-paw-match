@@ -58,7 +58,7 @@ const Contact = () => {
   return (
     <div className='contact-page'>
 
-      <PageHeader title='Contact' />
+      <PageHeader title='Kontakt' />
 
       <div className="container">
 

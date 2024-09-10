@@ -21,7 +21,8 @@ const PetDataBox = ({ petData }) => {
             </p>
             <p className="mb-2 fw-bold text-muted">
                 Težina:
-                <span className="ms-2 text-dark capitalize">{petWeight}</span>
+                <span className="mx-1 text-dark capitalize">{petWeight}</span>
+                <span className="text-dark capitalize">kg</span>
             </p>
             <p className="mb-2 fw-bold text-muted">
                 Energija:
