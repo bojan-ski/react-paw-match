@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import userSignIn from '../api/userSignIn'
 // components
 import FormInput from '../components/FormInput'
+import GoogleOAuth from '../components/GoogleOAuth'
 
 
 const SignIn = () => {
@@ -62,6 +63,10 @@ const SignIn = () => {
               Nova lozinka
             </Link>
           </div>
+        </section>
+
+        <section>
+          <GoogleOAuth />
         </section>
       </div>
     </div>

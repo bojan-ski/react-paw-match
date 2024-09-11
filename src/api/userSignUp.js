@@ -2,6 +2,9 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "../firebase.config"
+// toastify
+import { toast } from "react-toastify"
+
 
 const userSignUp = async (username, email, password) => {
     try {
@@ -22,13 +25,13 @@ const userSignUp = async (username, email, password) => {
         await setDoc(doc(db, 'users', newUser.uid), userCredentialsCopy)
 
         //success message
-        console.log('account created');
+        toast.success('Vaš nalog je kreiran')
 
         return true
     } catch (error) {
-        //error message
-        // console.log('There was an error, please try again')
         console.log(error);
+        //error message
+        toast.error('Greška prilikom kreiranja Vašeg nalog, molimo Vas probajte ponovo.')
 
         return false
     }

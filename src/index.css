@@ -120,7 +120,7 @@ main {
 }
 
 /* Login page / Sign Up page */
-.sing-up-page form,
+.sing-up-page .sing-up-page-content,
 .sing-in-page .sing-in-page-content,
 .forgot-password-page .forgot-password-content {
   max-width: 700px;
