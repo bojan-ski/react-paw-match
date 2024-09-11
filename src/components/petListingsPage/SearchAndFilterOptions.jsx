@@ -1,5 +1,6 @@
 import { useState } from "react"
 // components
+import SelectOptions from "../../components/SelectOptions.jsx"
 import PetListingsFilterOption from "./PetListingsFilterOption"
 import PetListingsSearchOption from "./PetListingsSearchOption"
 
@@ -36,14 +37,16 @@ const SearchAndFilterOptions = ({ fetchListings, conditions, setConditions }) =>
 
     return (
         <>
-            <section className="pet-listings-select-options mb-3">
+            <SelectOptions sectionCss='pet-listings-select-options' selectedOption={selectedConditionOption} setSelectedOption={setSelectedConditionOption} selectedOptionOne='search' selectedOptionTwo='filter' selectedOptionOneMark='Search' selectedOptionTwoMark='Filter'/>
+
+            {/* <section className="pet-listings-select-options mb-3">
                 <button type='button' className={selectedConditionOption == 'search' ? "select-option btn border text-muted me-2" : "btn border text-muted me-2"} onClick={() => setSelectedConditionOption('search')}>
                     Search
                 </button>
                 <button type='button' className={selectedConditionOption == 'filter' ? "select-option btn border text-muted" : "btn border text-muted"} onClick={() => setSelectedConditionOption('filter')}>
                     Filter
                 </button>
-            </section>
+            </section> */}
 
             {selectedConditionOption == 'search' ? (
                 <PetListingsSearchOption conditions={conditions} disableOption={disableOption} handleSetConditionOptions={handleSetConditionOptions} handleSubmittedConditionOptions={handleSubmittedConditionOptions} handleResetConditionOptions={handleResetConditionOptions} />

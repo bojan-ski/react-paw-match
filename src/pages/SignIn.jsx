@@ -1,5 +1,6 @@
 import { useState } from 'react';
 // components
+import SelectOptions from '../components/SelectOptions';
 import RegularSignInForm from '../components/signInPage/RegularSignInForm';
 import GoogleSignInForm from '../components/signInPage/GoogleSignInForm';
 // react icons 
@@ -8,7 +9,7 @@ import { FaGoogle } from "react-icons/fa";
 
 
 const SignIn = () => {
-  const [selectedSignUpOption, setSelectedSignUpOption] = useState('regular')
+  const [selectedSignInOption, setSelectedSignInOption] = useState('regular')
 
   return (
     <div className='sing-in-page'>
@@ -19,16 +20,18 @@ const SignIn = () => {
             Prijavi se
           </h3>
 
-          <section className="sign-up-select-options border-bottom pb-4 mb-4">
-            <button type='button' className={selectedSignUpOption == 'regular' ? "select-option btn border text-muted me-2" : "btn border text-muted me-2"} onClick={() => setSelectedSignUpOption('regular')}>
+          <SelectOptions sectionCss='sign-in-select-options border-bottom pb-4' selectedOption={selectedSignInOption} setSelectedOption={setSelectedSignInOption} selectedOptionOne='regular' selectedOptionTwo='google' selectedOptionOneMark={<TfiWrite />} selectedOptionTwoMark={<FaGoogle />}/>
+
+          {/* <section className="sign-up-select-options border-bottom pb-4 mb-4">
+            <button type='button' className={selectedSignInOption == 'regular' ? "select-option btn border text-muted me-2" : "btn border text-muted me-2"} onClick={() => setSelectedSignInOption('regular')}>
               <TfiWrite />
             </button>
-            <button type='button' className={selectedSignUpOption == 'google' ? "select-option btn border text-muted" : "btn border text-muted"} onClick={() => setSelectedSignUpOption('google')}>
+            <button type='button' className={selectedSignInOption == 'google' ? "select-option btn border text-muted" : "btn border text-muted"} onClick={() => setSelectedSignInOption('google')}>
               <FaGoogle />
             </button>
-          </section>
+          </section> */}
 
-          {selectedSignUpOption == 'regular' ? <RegularSignInForm /> : <GoogleSignInForm />}
+          {selectedSignInOption == 'regular' ? <RegularSignInForm /> : <GoogleSignInForm />}
         </div>
       </div>
     </div>

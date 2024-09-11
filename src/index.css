@@ -154,14 +154,6 @@ main {
 }
 
 /* PetListings page */
-/* SearchAndFilterOptions component */
-.pet-listings-page .pet-listings-select-options .btn:hover,
-.pet-listings-page .pet-listings-select-options .select-option {
-  background-color: var(--light-green-color);
-  color: #fff !important;
-  font-weight: 500;
-}
-
 /* PetListingsFilterOption component */
 .pet-listings-page .pet-listings-filter-option .form-label {
   font-size: 0.8rem;
@@ -215,9 +207,6 @@ main {
   color: #fff;
 }
 
-.post-new-listing .post-new-listing-form .new-listing-btn-options button {
-}
-
 /* Forum page */
 .forum-page .send-message-form form,
 .forum-page .forum-messages-list .forum-message-card {
@@ -236,6 +225,14 @@ main {
 }
 
 /* -------------------- APP (SHARED) COMPONENTS -------------------- */
+/* SelectOptions component */
+.select-options .btn:hover,
+.select-options .select-option {
+  background-color: var(--light-green-color);
+  color: #fff !important;
+  font-weight: 500;
+}
+
 /* PetListingGridViewCard component */
 .pet-listing-card-details {
   box-shadow: var(--dark-shadow);
