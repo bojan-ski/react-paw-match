@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useGlobalContext } from "../context";
 // components
 import PageHeader from "../components/PageHeader"
-import ProfilePageOptions from "../components/profilePage/profilePageOptions";
+import ProfilePageOptions from "../components/profilePage/ProfilePageOptions";
 import PostNewPetListing from "../components/profilePage/PostNewPetListing";
 import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
