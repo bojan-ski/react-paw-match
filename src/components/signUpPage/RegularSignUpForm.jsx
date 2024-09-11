@@ -28,7 +28,7 @@ const RegularSignUpForm = () => {
     }
 
     return (
-        <section className='sign-up-form'>
+        <section className='sign-up-form-regular'>
             <form onSubmit={handleRegularSignUpUserSubmit} >
 
                 {/* sign up email */}

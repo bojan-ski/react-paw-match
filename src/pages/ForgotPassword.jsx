@@ -30,7 +30,7 @@ const ForgotPassword = () => {
     return (
         <div className='forgot-password-page'>
             <div className="container">
-                <section className="forgot-password-content p-5 my-5 rounded-5">
+                <section className="forgot-password-content p-4 my-5 rounded-5">
 
                     <div className="forgot-password-main mb-4">
                         <h3 className="text-center fw-bold mb-4">

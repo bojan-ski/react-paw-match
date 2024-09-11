@@ -2,13 +2,12 @@ import { useNavigate } from "react-router-dom"
 // api func
 import userGoogleOAuth from "../../api/userGoogleOAuth"
 // components
-import FormInputCheckbox from "../FormInputCheckbox"
 import GoogleOAuthBtn from "../GoogleOAuthBtn"
 // toastify
 import { toast } from "react-toastify"
 
 
-const GoogleSignUpForm = () => {
+const GoogleSignInForm = () => {
     const navigate = useNavigate()
 
     const handleGoogleOAuth = async e => {
@@ -18,7 +17,7 @@ const GoogleSignUpForm = () => {
 
         if(response){
             //success message
-            toast.success('Vaš nalog je kreiran')
+            toast.success('Uspešno ste se prijavili')
 
             // navigate user 
             navigate('/nalog')
@@ -26,19 +25,12 @@ const GoogleSignUpForm = () => {
     }
 
     return (
-        <section className='sign-up-form-regular-google-oauth text-center'>
+        <section className='sign-in-form-regular-google-oauth text-center'>
             <form onSubmit={handleGoogleOAuth}>
                 <GoogleOAuthBtn />
-
-                {/* Terms & Conditions checkbox */}
-                <FormInputCheckbox linkTitle='Pravila korišćenja' linkUrl='pravila-koriscenja' />
-
-                {/* Privacy Policy checkbox */}
-                <FormInputCheckbox linkTitle='Pravila privatnosti' linkUrl='pravila-privatnosti' />
-
             </form>
         </section>
     )
 }
 
-export default GoogleSignUpForm
+export default GoogleSignInForm

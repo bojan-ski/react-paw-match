@@ -129,8 +129,8 @@ main {
 }
 
 .sing-up-page form .checkbox,
-.sing-in-page-page-footer p,
-.sing-in-page-page-footer a,
+.sign-in-form-regular-footer p,
+.sign-in-form-regular-footer a,
 .forgot-password-page .forgot-password-footer p,
 .forgot-password-page .forgot-password-footer a {
   font-size: 0.8rem;

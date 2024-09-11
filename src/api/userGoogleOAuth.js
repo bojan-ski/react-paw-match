@@ -21,25 +21,17 @@ const userGoogleOAuth = async () => {
                 username: user.displayName,
                 email: user.email,
                 timestamp: serverTimestamp()
-            })
-
-            //success message
-            // toast.success('Vaš nalog je kreiran')
-        } else {
-            //success message
-            // toast.success('Uspešno ste se prijavili')
-        }
+            })            
+        } 
 
         return true
-
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         //error message
         toast.error('Greška prilikom korišćenja Google OAuth, molimo Vas probajte ponovo.')
 
         return false
     }
-
 }
 
 export default userGoogleOAuth
