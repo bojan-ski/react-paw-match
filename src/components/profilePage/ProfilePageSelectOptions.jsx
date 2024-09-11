@@ -1,4 +1,4 @@
-const ProfilePageOptions = ({selectedProfilePageOption, setSelectedProfilePageOption}) => {
+const ProfilePageSelectOptions = ({ selectedProfilePageOption, setSelectedProfilePageOption }) => {
     return (
         <section className="profile-page-options mb-5">
             <button className={`btn border px-3 me-3 ${selectedProfilePageOption == 'my-listings' && 'selected-profile-page-options'}`} onClick={() => setSelectedProfilePageOption('my-listings')}>
@@ -16,4 +16,4 @@ const ProfilePageOptions = ({selectedProfilePageOption, setSelectedProfilePageOp
     )
 }
 
-export default ProfilePageOptions
+export default ProfilePageSelectOptions

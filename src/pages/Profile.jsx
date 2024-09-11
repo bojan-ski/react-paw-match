@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useGlobalContext } from "../context";
 // components
 import PageHeader from "../components/PageHeader"
-import ProfilePageOptions from "../components/profilePage/ProfilePageOptions";
+import ProfilePageSelectOptions from "../components/profilePage/ProfilePageSelectOptions";
 import PostNewPetListing from "../components/profilePage/PostNewPetListing";
 import MyPetListings from "../components/profilePage/MyPetListings";
 import BookmarkedPetListings from "../components/profilePage/BookmarkedPetListings";
@@ -23,7 +23,7 @@ const Profile = () => {
           <>
             <PageHeader title={`Pozdrav 👋 ${userProfileDetails.userName.toUpperCase()}`} />
 
-            <ProfilePageOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
+            <ProfilePageSelectOptions selectedProfilePageOption={selectedProfilePageOption} setSelectedProfilePageOption={setSelectedProfilePageOption} />
 
             {selectedProfilePageOption == 'my-listings' && <MyPetListings userProfileDetails={userProfileDetails} />}
 
